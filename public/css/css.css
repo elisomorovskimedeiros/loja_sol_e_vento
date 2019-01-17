@@ -1,0 +1,33 @@
+body{
+    background-color: #e3dedb;
+}
+
+#container{    
+    padding: 15px;
+}
+
+#cabecalho{
+    background-color: #ffccaa;
+}
+
+#imagem_inicio{
+    width: 100%;
+    height: 600px;  
+    background-image: url(/imagens/fundo_cartao.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.espaco{
+    padding: 15px;
+}
+
+.botoes{
+    margin: 15px;
+}
+
+#myCarousel{
+    width: 800px;
+    margin: auto;
+}
+
