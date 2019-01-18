@@ -14,6 +14,6 @@ app.get("/", function(req, res){
     res.render("index");
 });
 
-app.listen("80", function(){
-    console.log("Queimando pneu na porta 80!!");
+app.listen(process.env.PORT_APP, function(){
+    console.log("Queimando pneu na porta "+process.env.PORT_APP);
 });
