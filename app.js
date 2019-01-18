@@ -11,7 +11,7 @@ app.use(express.static("public"));
 
 //rota principal
 app.get("/", function(req, res){
-    res.render("index");
+    res.render("index.ejs");
 });
 
 app.listen("21080", function(){
