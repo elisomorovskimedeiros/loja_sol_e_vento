@@ -1,9 +1,11 @@
-const     express = require("express"),
+const     express = require("express");  
+              ejs = require("ejs");
        bodyParser = require("body-parser"),
    methodOverride = require("method-override");
 
 const app = express();
 
+app.set("view engine", ejs);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
@@ -11,7 +13,7 @@ app.use(express.static("public"));
 
 //rota principal
 app.get("/", function(req, res){
-    res.render("index.html");
+    res.render("index.ejs");
 });
 
 app.listen("21080", function(){
