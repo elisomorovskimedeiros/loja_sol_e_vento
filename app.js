@@ -4,14 +4,14 @@ const     express = require("express"),
 
 const app = express();
 
-app.set("view engine", "ejs");
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(express.static("public"));
 
 //rota principal
 app.get("/", function(req, res){
-    res.render("index.ejs");
+    res.render("index.html");
 });
 
 app.listen("21080", function(){
