@@ -31,3 +31,15 @@ body{
     margin: auto;
 }
 
+.rodape{
+    background-color: #ffccaa;
+    display: -webkit-flex;
+}
+.direita{
+    position: absolute;
+    right: 10px
+}
+.esquerda{
+    margin-left: 0%;
+}
+
