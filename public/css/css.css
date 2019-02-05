@@ -18,6 +18,11 @@ body{
     background-repeat: no-repeat;
 }
 
+#carrossel{
+    margin-top: 100px;
+    width: 100px;
+}
+
 .espaco{
     padding: 15px;
 }
@@ -41,5 +46,11 @@ body{
 }
 .esquerda{
     margin-left: 0%;
+}
+
+#sobre_nos{
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
