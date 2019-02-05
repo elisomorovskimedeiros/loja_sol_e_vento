@@ -24,9 +24,16 @@ app.get("/novo", function(req, res){
     res.render("novo_site.ejs");
 });
 
-app.get("*", function(req, res){
+app.get("/como_funciona", function(req, res){
     res.render("construcao.ejs");
 });
+app.get("/quem_somos", function(req, res){
+    res.render("construcao.ejs");
+});
+app.get("/contato", function(req, res){
+    res.render("construcao.ejs");
+});
+
 
 app.listen("21080", function(){
     console.log("Queimando pneu na porta 21080");
