@@ -57,6 +57,20 @@
             -webkit-text-stroke-color: #000; /* cor da borda */
             font-size: 20px;
         }
+        .rodape{
+            margin: 15px;
+        }
+
+        .container_sobre_nos{
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .img{
+            margin-right: 100px;
+            margin-top: 15px;
+        }
+
         @media only screen and (min-width: 1020px){
             #link_direita{
                 margin-right: 30px;
@@ -71,6 +85,9 @@
                 width: 100%;
                 margin-left: auto;
                 margin-right: auto;
+            }
+            .img_celular{
+                width: 500px;
             }
         }
         @media only screen and (min-width: 768px){
@@ -157,7 +174,10 @@
             .espaco_mobile{
                 margin-top: 15px;
             }
-            
+            .img{
+                width: 400px;
+                margin-right: 0px;
+            }
         }
 
         /*CÓDIGOS SLIDE SHOW*/

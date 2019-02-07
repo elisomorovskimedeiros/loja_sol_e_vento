@@ -16,10 +16,6 @@ app.get("/", function(req, res){
     res.render("index.ejs");
 });
 
-app.get("/sobre_nos", function(req, res){
-    res.render("sobre_nos.ejs");
-});
-
 app.get("/novo", function(req, res){
     res.render("novo_site.ejs");
 });
@@ -28,7 +24,7 @@ app.get("/como_funciona", function(req, res){
     res.render("construcao.ejs");
 });
 app.get("/quem_somos", function(req, res){
-    res.render("construcao.ejs");
+    res.render("sobre_nos.ejs");
 });
 app.get("/contato", function(req, res){
     res.render("construcao.ejs");
