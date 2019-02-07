@@ -71,6 +71,10 @@
             margin-top: 15px;
         }
 
+        .segunda_parte{
+            margin-top: 200px;
+        }
+
         @media only screen and (min-width: 1020px){
             #link_direita{
                 margin-right: 30px;
@@ -89,6 +93,7 @@
             .img_celular{
                 width: 500px;
             }
+
         }
         @media only screen and (min-width: 768px){
             /*Configuração para desktop*/
@@ -177,6 +182,9 @@
             .img{
                 width: 400px;
                 margin-right: 0px;
+            }
+            .container_sobre_nos{
+                max-width: 400px;
             }
         }
 

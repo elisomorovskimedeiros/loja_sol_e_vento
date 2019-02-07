@@ -1,14 +1,14 @@
 
     <% include partials/cabecalho %>
     <!--Container principal-->
-    <div class="row">
+    <div class="row" style="margin-top: 100px">
         <div class="col-4 left">
                 <ul class="posicao_botoes">
-                    <a href="/como_funciona"><li class="botao_principal" onmouseover="diminuiSombra(this)" onmouseout="aumentaSombra(this)">
+                    <a href="#como_funciona"><li class="botao_principal" onmouseover="diminuiSombra(this)" onmouseout="aumentaSombra(this)">
                         Como funciona a energia solar?<br>
                     </li></a>
                     <a href="/como_funciona"><li class="botao_principal" onmouseover="diminuiSombra(this)" onmouseout="aumentaSombra(this)">
-                        Produtos da linha solar<br>
+                        Como funciona em sua casa?<br>
                     </li></a>
                     <a href="/como_funciona"><li class="botao_principal" onmouseover="diminuiSombra(this)" onmouseout="aumentaSombra(this)">
                         Produtos da linha de iluminação<br>
@@ -25,6 +25,24 @@
                 <img class="mySlides w3-animate-left" src="/imagens/interna.jpg" style="width:100%">
             </div> 
         </div>
+    </div>
+    <div>
+        <div align="justify" class="container_sobre_nos segunda_parte">
+            <h1 id="como_funciona" style="text-align: center">Como funciona a energia solar?</h1>
+            <p>&nbsp;&nbsp; As placas solares são compostas por duas finas lâminas de silício, o mesmo utilizado em componentes eletrônicos. Esse material tem
+                capacidade de absorver a luz, principalmente a luz visível e um pouco ainda do infravermelho e do ultravioleta. Cada foton de luz 
+                absorvido provoca o deslocamento de um elétron do silício de uma lâmina para a outra, criando assim uma tensão elétrica de aproximamente
+                 0,6V entre elas. Assim, somando as tensões das divesas células existentes em cada módulo do arranjo foto voltaico chega-se a tensão de 
+                 trabalho normal da usina solar, que varia normalmente entre 100 e 1000V contínuos para sistemas conectados à rede da concenssionária 
+                 (on grid) e entre 14V e 60V para sistemas isolados (off grid). 
+            </p>
+            <img src="/imagens/sensibilidade-espectral.jpg">
+        </div>
+        <a href="#cabecalho">
+            <div class="voltar" style="margin-left: 15px">
+                Voltar ao início
+            </div>
+        </a>
     </div>
     <script src="/js/main.js"></script>  
     <% include partials/rodape %>
