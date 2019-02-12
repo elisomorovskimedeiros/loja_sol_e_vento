@@ -74,6 +74,16 @@
         .segunda_parte{
             margin-top: 200px;
         }
+        
+        .voltar{
+            margin-top: 15px;
+            margin-left: 15px; 
+            background-color: #ffccaa;
+            border-radius: 15px;
+            padding: 8px;
+            width: 160px;
+            text-align: center;
+        }
 
         @media only screen and (min-width: 1020px){
             #link_direita{
@@ -179,8 +189,8 @@
             .espaco_mobile{
                 margin-top: 15px;
             }
-            .img{
-                width: 400px;
+            img{
+                width: 90%;
                 margin-right: 0px;
             }
             .container_sobre_nos{
