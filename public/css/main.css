@@ -2,6 +2,7 @@
         html {
             font-family: "Lucida Sans", sans-serif;
         }
+       
         *{
             box-sizing: border-box;
         }
@@ -21,8 +22,9 @@
             text-decoration: none;
         }
         .links-titulo{
-            padding-top: 30px;
-            text-decoration: none; 
+            
+            text-decoration: none;
+            text-align: center; 
         }
         .posicao_botoes{
             margin-top: 15px;
@@ -32,29 +34,27 @@
         .cabecalho a {
             text-decoration: none;
             color:white;
-            -webkit-text-stroke-width: 1px; /* largura da borda */
-            -webkit-text-stroke-color: #000; /* cor da borda */
+            /*-webkit-text-stroke-width: 1px; /* largura da borda */
+            /*-webkit-text-stroke-color: #000; /* cor da borda */
         }
         .cabecalho{
             padding: 8px;
-            background-color:#ffccaa;
+            background-color: #fba75d;
             border: 1px solid #e7e7e7;
             font-size: 20px;
         }
         
         .botao_principal{
             list-style-type: none;
-            background-color: #ffccaa;
+            background-color: #fba75d;
             border: 1px solid #e7e7e7;
-            height: 50px;
+            height: 70px;
             margin-top: 12%;
             text-align: center;
             padding-top: 7px;
             border-radius: 10px;
             box-shadow: 10px 10px 10px #888;
             color:white;
-            -webkit-text-stroke-width: 1px; /* largura da borda */
-            -webkit-text-stroke-color: #000; /* cor da borda */
             font-size: 20px;
         }
         .rodape{
@@ -78,17 +78,23 @@
         .voltar{
             margin-top: 15px;
             margin-left: 15px; 
-            background-color: #ffccaa;
+            background-color: #fba75d;
             border-radius: 15px;
             padding: 8px;
             width: 160px;
             text-align: center;
         }
-
+        #logotipoSite{
+            width: 150px;
+        }
+        #links_cabecalho{            
+            padding: 15px;
+        }
+       
         @media only screen and (min-width: 1020px){
-            #link_direita{
+            #linkCabecalhoDireita{
                 margin-right: 30px;
-            }
+            }            
         }
         @media only screen and (max-width: 1020px){
             /*Configuração máxima para desktop tela pequena*/
@@ -99,6 +105,9 @@
                 width: 100%;
                 margin-left: auto;
                 margin-right: auto;
+                margin-top: auto;
+                margin-bottom: auto;
+                padding-top: 0px;
             }
             .img_celular{
                 width: 500px;
@@ -134,7 +143,7 @@
             }   
         }
        
-        /* Configuração para tablets: */
+        /* Configuração para tablets: 
         @media only screen and (min-width: 600px) {
             
             .col-s-1 {width: 8.33%;}
@@ -149,10 +158,17 @@
             .col-s-10 {width: 83.33%;}
             .col-s-11 {width: 91.66%;}
             .col-s-12 {width: 100%;}
+            
+            .titulo{
+                width: 200px;
+                margin-right: auto;
+                margin-left: auto;
             }
+        }*/
 
         /*Configuração para smartphone*/      
-        @media only screen and (max-width: 600px){
+        @media only screen and (max-width: 768px){
+
             [class*="col-"] {
                 width: 100%;               
             }
@@ -160,18 +176,8 @@
                 padding: 8px;
             }
             .botao_principal{
-                height: 50px;
-            }
-        
-            /*
-            .links-titulo{
-                position: relative;
-            }
-            */
-            .centralizar_div{
-                width: 200px;       
-                margin-left: 23%;                
-            }
+                height: 70px;
+            }        
 
             .elementos_div{
                 display: block;
