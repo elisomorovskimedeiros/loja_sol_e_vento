@@ -1,0 +1,112 @@
+html {
+    font-family: "Lucida Sans", sans-serif;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.espaco-borda-direita{
+    margin-top: 15px;
+    margin-right: 15px;
+}
+
+.espaco-borda-esquerda{
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.centralizar-div{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.icone{
+    width: 35px;
+}
+
+.transparencia {
+    filter:alpha(opacity=30);
+    opacity: 0.3;
+    -moz-opacity:0.3; /*mozzila*/
+    -webkit-opacity:0.3; /*chrome*/
+}
+
+.botao{
+    background: -webkit-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
+    background: -moz-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
+    background: -o-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
+    background: -ms-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
+    background: linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
+    border: 1px solid #CCCCCE;
+    border-radius: 3px;
+    box-shadow: 4px 3px 0 rgba(0, 0, 0, .3),
+                  0 2px 7px rgba(0, 0, 0, 0.2);
+    color: #616165;
+    
+    font-weight: bold;
+    line-height: 25px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 5px 15px;
+    width: 150px;            
+}
+
+.botao:hover{
+    box-shadow: 6px 5px 0 rgba(0, 0, 0, .3),
+        0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+@media only screen and (min-width: 768px){
+    /*Configuração para desktop*/
+    .col-1 {width: 8.33%;}
+    .col-2 {width: 16.66%;}
+    .col-3 {width: 25%;}
+    .col-4 {width: 33.33%;}
+    .col-5 {width: 41.66%;}
+    .col-6 {width: 50%;}
+    .col-7 {width: 58.33%;}
+    .col-8 {width: 66.66%;}
+    .col-9 {width: 75%;}
+    .col-10 {width: 83.33%;}
+    .col-11 {width: 91.66%;}
+    .col-12 {width: 100%;}
+
+    .right{
+        float: right;
+    }
+    .left{
+        float: left;
+    }
+}
+
+@media only screen and (max-width: 768px){
+   
+    .botao{
+        width: 100vw;
+    }
+    [class*="col-"] {
+        width: 90vw;               
+    }
+
+    h1{
+        text-align: center;
+    }
+
+    .espaco_mobile{
+        margin-top: 15px;
+    }
+    img{
+        width: 90%;
+        margin-right: 0px;
+    }
+
+    textarea, h2{
+        width: 80%;
+    }
+}
