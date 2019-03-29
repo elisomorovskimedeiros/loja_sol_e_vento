@@ -2,9 +2,11 @@ const     express = require("express");
               ejs = require("ejs");
        bodyParser = require("body-parser"),
    methodOverride = require("method-override"),
-       nodemailer = require('nodemailer');
+       nodemailer = require('nodemailer'),
+        Principal = require("./controller/principal");
 
 const app = express();
+const principal = new Principal();
 
 let resposta = {
     resposta: ""};
@@ -31,18 +33,19 @@ app.get("/", function(req, res){
     res.render("index.ejs");
 });
 
-app.get("/novo", function(req, res){
-    res.render("novo_site.ejs");
-});
-
 app.get("/como_funciona", function(req, res){
-    res.render("construcao.ejs");
+    res.render("inserir_produtos.ejs");
 });
 app.get("/quem_somos", function(req, res){
     res.render("sobre_nos.ejs");
 });
 app.get("/contato", function(req, res){
     res.render("contato.ejs", {resposta});
+});
+
+//Inserção de produto na loja
+app.post("/inserirProduto", function(req, res){
+    principal.inserirProduto(req, res);    
 });
 
 //função que deixa o número para whatsapp apenas com números
@@ -88,7 +91,7 @@ app.post("/mandarMensagem", function(req, res){
                 resposta.resposta = 'true';
                 res.render("contato.ejs",{resposta});
                 console.log(info.response);                
-            }
+            }   
             resposta.resposta = '';
         });    
     }else if(mensagem.whats && mensagem.whats != ''){

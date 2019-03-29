@@ -1,0 +1,22 @@
+<% include partials/cabecalho %>
+<div class="container-400px">
+    <form method="POST" action="/inserirProduto" enctype="multipart/form-data">
+        <h2><strong>Insira um novo produto</strong></h2>
+        <p>Categoria:</p>
+        <input type="text" name="tipo"><br>
+        <p>Nome:</p>
+        <input type="text" name="nome"><br>
+        <p>Quantidade em estoque:</p>
+        <input type="text" name="quantidade"><br>
+        <p>Preço:</p>
+        <input type="text" name="preco"><br>
+        <p>Foto:</p>
+        <input type="file" name="foto"><br><br>
+        <!--<input type="button" value="Inserir">-->
+        <input type="submit">
+    </form>
+    
+
+</div>
+
+<% include partials/rodape %>

@@ -20,7 +20,11 @@
     "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "formidable": "^1.2.1",
+    "fs": "0.0.1-security",
     "method-override": "^3.0.0",
-    "nodemailer": "^5.1.1"
+    "mongoose": "^5.4.20",
+    "nodemailer": "^5.1.1",
+    "suspend": "^0.7.0"
   }
 }

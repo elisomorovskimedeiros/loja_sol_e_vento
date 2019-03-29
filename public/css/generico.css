@@ -35,6 +35,24 @@ html {
     -webkit-opacity:0.3; /*chrome*/
 }
 
+.container-400px{
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container-600px{
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container-800px{
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .botao{
     background: -webkit-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
     background: -moz-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
@@ -56,6 +74,7 @@ html {
     width: 150px;            
 }
 
+
 .botao:hover{
     box-shadow: 6px 5px 0 rgba(0, 0, 0, .3),
         0 10px 20px rgba(0, 0, 0, 0.2);
@@ -63,11 +82,11 @@ html {
 
 
 @media only screen and (min-width: 768px){
-    /*Configuração para desktop*/
+    /*Configuração para desktop*/    
     .col-1 {width: 8.33%;}
     .col-2 {width: 16.66%;}
     .col-3 {width: 25%;}
-    .col-4 {width: 33.33%;}
+    .col-4 {width: 33.33%;float: left;}
     .col-5 {width: 41.66%;}
     .col-6 {width: 50%;}
     .col-7 {width: 58.33%;}
@@ -76,7 +95,9 @@ html {
     .col-10 {width: 83.33%;}
     .col-11 {width: 91.66%;}
     .col-12 {width: 100%;}
-
+    [class*="col-"]{
+        float: left;
+    }
     .right{
         float: right;
     }
@@ -88,11 +109,17 @@ html {
 @media only screen and (max-width: 768px){
    
     .botao{
-        width: 100vw;
+        width: 100%;
     }
+    
     [class*="col-"] {
         width: 90vw;               
     }
+
+    [class*="container-"]{
+        max-width: 90%;
+    }
+
 
     h1{
         text-align: center;

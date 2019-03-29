@@ -21,7 +21,7 @@
                     </div>
                     
                     <div class="col-9 right campo_formulario">
-                        <input type="text" name="nome" placeholder="José da Silva" onblur="verificarNome(this.value)" onkeyup="verificarNome(this.value)">
+                        <input type="text" name="nome" placeholder="Seu nome" onblur="verificarNome(this.value)" onkeyup="verificarNome(this.value)">
                         <span id="avisoNome"></span><br>
                     </div>             
                 </div>
@@ -57,9 +57,9 @@
                 let divStatus = document.getElementById("resposta_email").innerHTML;
                 console.log(divStatus);
                 if(divStatus.indexOf("true") != -1){
-                    document.getElementById("contato").innerHTML = "<div><div style='width: 200px;' class='centralizar-div'><img src='/imagens/certo.png' width=200px><br>Mensagem Enviada<a href='/'><div class='botao' style='margin-top: 15%'>Voltar</div></a></div>";
+                    document.getElementById("contato").innerHTML = "<div><div style='width: 200px;' class='centralizar-div'><img src='/imagens/certo.png'><br>Mensagem Enviada<a href='/'><div class='botao' style='margin-top: 15%'>Voltar</div></a></div>";
                 }else if(divStatus.indexOf("false") != -1){
-                    document.getElementById("contato").innerHTML = "<div><div style='width: 200px;' class='centralizar-div'><img src='/imagens/erro.png' width=200px><br>Ocorreu um erro no envio<a href='/'><div class='botao' style='margin-top: 15%'>Voltar</div></a></div>";
+                    document.getElementById("contato").innerHTML = "<div><div style='width: 200px;' class='centralizar-div'><img src='/imagens/erro.png'><br>Ocorreu um erro no envio<a href='/'><div class='botao' style='margin-top: 15%'>Voltar</div></a></div>";
                 }
         </script>
         

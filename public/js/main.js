@@ -6,6 +6,14 @@ var statusFormContato = {
   mensagem: false
 };
 
+//JOGO DE SOMBRA NOS BOTÕES
+function diminuiSombra(elemento){
+  elemento.style.boxShadow = "5px 5px 5px #888";
+}
+function aumentaSombra(elemento){
+  elemento.style.boxShadow = "10px 10px 10px #888";
+}
+
 //VERIFICAÇÃO DO CAMPO NOME NO SITE DE CONTATO
 function verificarNome(nome){
   if (isNaN(nome)  && (nome.length >= 2)){
