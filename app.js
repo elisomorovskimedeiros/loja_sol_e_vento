@@ -34,7 +34,7 @@ app.get("/", function(req, res){
 });
 
 app.get("/como_funciona", function(req, res){
-    res.render("inserir_produtos.ejs");
+    res.render("construcao.ejs");
 });
 app.get("/quem_somos", function(req, res){
     res.render("sobre_nos.ejs");
