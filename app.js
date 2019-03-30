@@ -42,6 +42,9 @@ app.get("/quem_somos", function(req, res){
 app.get("/contato", function(req, res){
     res.render("contato.ejs", {resposta});
 });
+app.get("/iluminacao", function(req, res){
+    res.render("iluminacao.ejs");
+});
 
 //Inserção de produto na loja
 app.post("/inserirProduto", function(req, res){
