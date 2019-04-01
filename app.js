@@ -32,7 +32,6 @@ let transporter = nodemailer.createTransport({
 app.get("/", function(req, res){
     res.render("index.ejs");
 });
-
 app.get("/como_funciona", function(req, res){
     res.render("construcao.ejs");
 });
@@ -44,6 +43,9 @@ app.get("/contato", function(req, res){
 });
 app.get("/iluminacao", function(req, res){
     res.render("iluminacao.ejs");
+});
+app.get("/solar", function(req, res){
+    res.render("solar.ejs");
 });
 
 //Inserção de produto na loja
