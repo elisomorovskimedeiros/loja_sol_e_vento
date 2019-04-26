@@ -45,7 +45,7 @@ app.get("/iluminacao", function(req, res){
     res.render("iluminacao.ejs");
 });
 app.get("/solar", function(req, res){
-    res.render("solar.ejs");
+    res.render("solar.ejs"); 
 });
 
 //Inserção de produto na loja
@@ -64,6 +64,7 @@ function apenasNumeros(string)
 app.post("/mandarMensagem", function(req, res){
     let mensagem = {
         nome: req.body.nome,
+        cidade: req.body.cidade,
         email: req.body.email,
         whats: req.body.whats,
         conteudo: req.body.mensagem
@@ -71,6 +72,7 @@ app.post("/mandarMensagem", function(req, res){
 
     mensagem.conteudo = "Mensagem recebido pelo site!\n"+
                         "Nome: "+ mensagem.nome+"\n"+
+                        "Cidade: "+ mensagem.cidade+"\n"+
                         "email: "+ mensagem.email+"\n"+
                         "Mensagem: \n"+
                         mensagem.conteudo;
