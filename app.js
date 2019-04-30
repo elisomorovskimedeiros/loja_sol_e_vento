@@ -53,6 +53,10 @@ app.post("/inserirProduto", function(req, res){
     principal.inserirProduto(req, res);    
 });
 
+app.get("/massoterapia", function(req, res){
+    res.render("site_Nure/index.ejs");
+});
+
 //função que deixa o número para whatsapp apenas com números
 function apenasNumeros(string) 
 {
