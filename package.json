@@ -23,7 +23,7 @@
     "formidable": "^1.2.1",
     "fs": "0.0.1-security",
     "method-override": "^3.0.0",
-    "mongoose": "^5.4.20",
+    "mongoose": "^5.7.5",
     "nodemailer": "^5.1.1",
     "suspend": "^0.7.0"
   }
