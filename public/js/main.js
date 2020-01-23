@@ -223,3 +223,11 @@ function statusEmail(){
     document.getElementById("container-email").innerHTML = "<div class='row'><div class='col-3'><img src='certo.png'></div><div class='col-9'>Mensagem Enviada</div></div><div col-12><a href='/'>Voltar</a></div>";
   }
 }
+
+//Emissor de mensagems tipo "snackbar"
+function emitirAviso(mensagem, id, tempo){
+  let snackbar = document.getElementById(id);
+  snackbar.innerHTML = mensagem;
+  snackbar.className = "show";
+  setTimeout(function(){snackbar.className = snackbar.className.replace("show", ""); }, tempo);
+}

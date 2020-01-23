@@ -2,15 +2,15 @@ const Db = require("./Db");
 const db = new Db();
 
 class Produto{
-    constructor(nome_produto, ns_produto, pn_produto, imagem_produto, preco_produto, qtd_produto, descricao_produto){
+    constructor(){
 
-        this.nome_produto = nome_produto;
-        this.ns_produto = ns_produto;
-        this.pn_produto = pn_produto;
-        this.imagem_produto = imagem_produto;
-        this.preco_produto = preco_produto;
-        this.qtd_produto = qtd_produto;
-        this.descricao_produto = descricao_produto;
+        this.nome_produto = null;
+        this.ns_produto = null;
+        this.pn_produto = null;
+        this.imagem_produto = null;
+        this.preco_produto = null;
+        this.qtd_produto = null;
+        this.descricao_produto = null;
         this.query = function(sql, variavel){
             return new Promise(function(resolve, reject){
                 db.connection.query(sql, variavel, function(err, resultado){

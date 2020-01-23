@@ -4,15 +4,33 @@ const     express = require("express");
    methodOverride = require("method-override"),
        nodemailer = require('nodemailer'),
         Principal = require("./controller/principal"),
-        Produto = require("./model/Produto");
+        Produto = require("./model/Produto"),
+        multer  = require('multer');//upload de arquivos
+
+
+//utilizado o midlleware Multer para captura do upload do arquivo contendo a foto dos produtos
+
+//configuração do multer
+//site que ajudou: https://code.tutsplus.com/tutorials/file-upload-with-multer-in-node--cms-32088
+var storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, "public/imagens/");//local de gravação do arquivo
+    },
+    filename: function (req, file,cb){
+        cb(null, file.originalname);//nome do arquivo
+    }
+});
+
+var upload = multer({ storage: storage});//variável que manipula o post
+
 
 const app = express();
 const principal = new Principal();
-const produto = new Produto(null, null, null, null, null, null, null);
+let produto = new Produto();
 let resposta = {
     resposta: ""};
 
-app.set("view engine", ejs);
+app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
@@ -54,8 +72,48 @@ app.get("/solar", function(req, res){
 });
 
 //Inserção de produto na loja
-app.post("/inserirProduto", function(req, res){
-    principal.inserirProduto(req, res);    
+app.get("/controle_produtos", function(req, res){
+    produto.select().then(function(resposta){
+        if(!resposta.status){
+            console.log(resposta.resultado);
+        }else{
+            let produtos = resposta.resultado;
+            res.render("controle_produtos.ejs", {produtos});
+        }
+    });
+});
+
+app.get("/produtos/new", function(req, res){
+    res.render("novo_produto.ejs");    
+});
+
+app.post("/produtos", upload.single('imagem_produto'), function(req, res){
+    const file = req.file;
+    let imagem_produto = '';
+    if(!file){//caso nenhuma foto tenha sido inserida
+        console.log("não veio foto");
+    }else{
+        imagem_produto = "imagens/"+ file.originalname;
+    }
+    produto.nome_produto = req.body.nome_produto;
+    produto.pn_produto = req.body.pn_produto;
+    produto.imagem_produto = imagem_produto; 
+    produto.preco_produto = req.body.preco_produto; 
+    produto.qtd_produto = req.body.qtd_produto;
+    produto.descricao_produto = req.body.descricao_produto;
+    
+    produto.insert(produto).then(function(resposta){
+        if(!resposta.status){
+            console.log(resposta);
+            resposta = "Ocorreu um erro na inserção do produto".
+            res.render("novo_produto", {resposta});
+            
+        }else{
+            resposta = "Produto inserido com sucesso!";
+            res.render("novo_produto", {resposta});
+        }
+    }); 
+    
 });
 
 app.get("/massoterapia", function(req, res){

@@ -1,0 +1,96 @@
+<% include partials/cabecalho %>
+<div class="container">
+    <btn class="btn btn-success">
+        <a href="/produtos/new">
+        Inserir novo produto
+    </a>
+    </btn>
+    <div class="row container container-loja">
+        <% produtos.forEach(function(produto, indice){ %>
+            <div class="col-md-2 container-produto" data-toggle="modal" data-target="#janela_de_edicao_de_produto">
+                <a href="#">
+                    <div class="foto-produto">
+                        <img src="<%= produto.imagem_produto%>" width="150px">
+                    </div>
+                    <div class="nome-produto">
+                        <h4><%= produto.nome_produto %></h4>
+                    </div>
+                    <div class="descricao-produto"> 
+                        <p><%= produto.descricao_produto %> </p>
+                    </div>
+                    <div class="preco-produto">
+                        <h3>R$<%= produto.preco_produto %></h3>
+                    </div>
+                </a>
+            </div>
+        <% }); %>
+    </div>
+</div> 
+
+<!-- Janela de Inserção de brinquedo no evento -->
+<div class="modal fade" id="janela_de_edicao_de_produto">              
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- cabecalho -->
+            <form id="form_editar_produto">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="tituloInsercaoBrinquedo">Editar Produto</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"  id="fecharModal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>            
+                <!-- corpo -->
+                <div class="modal-body" id="corpoModal">
+                    <div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Nome do Produto</label>
+                                <input type="text" class="form-control" name="nome_produto">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Foto do Produto</label>
+                                <input type="file" class="form-control-file" name="imagem_produto">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Código do Produto</label>
+                                <input type="text" class="form-control" name="pn_produto">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Preço do Produto</label>
+                                <input type="number" class="form-control" name="preco_produto">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Quantidade em Estoque</label>
+                                <input type="text" class="form-control" name="qtd_produto">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Descrição do Produto</label>
+                                <input type="text" class="form-control" name="descricao_produto">
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <!-- rodape -->
+                <div class="modal-footer">
+                    <div class="container d-flex">
+                        <div class="p-2">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                Excluir Produto
+                            </button>
+                        </div>
+                        <div class="ml-auto p-2">
+                            <button type="button" class="btn btn-light" data-dismiss="modal">
+                                Cancelar
+                            </button>
+                            <button type="button" class="btn btn-success" data-dismiss="modal">
+                                OK
+                            </button>
+                        </div>
+                    </div>
+                </div>   
+            </form>
+        </div>    
+    </div>
+</div>
+    <!-- fechamento do modal de inserção de brinquedo no evento -->
+<% include partials/rodape %> 
