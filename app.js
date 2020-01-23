@@ -3,11 +3,12 @@ const     express = require("express");
        bodyParser = require("body-parser"),
    methodOverride = require("method-override"),
        nodemailer = require('nodemailer'),
-        Principal = require("./controller/principal");
+        Principal = require("./controller/principal"),
+        Produto = require("./model/Produto");
 
 const app = express();
 const principal = new Principal();
-
+const produto = new Produto(null, null, null, null, null, null, null);
 let resposta = {
     resposta: ""};
 
@@ -30,7 +31,11 @@ let transporter = nodemailer.createTransport({
 
 //rota principal
 app.get("/", function(req, res){
-    res.render("index.ejs");
+    produto.select().then(function(resultado){
+        let produtos = resultado.resultado;
+        res.render("index.ejs", {produtos});
+    });
+    
 });
 app.get("/como_funciona", function(req, res){
     res.render("construcao.ejs");

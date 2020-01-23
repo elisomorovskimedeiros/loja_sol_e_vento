@@ -123,12 +123,12 @@
         }
         .container-loja{
             margin-top: 30px;
-            margin-left: 20vw;
-            margin-right: 20vw;
+            margin-left: 5vw;
+            margin-right: 2vw;
             height: 300px;
             text-align: center;
             color: #666;
-            font-size: 14px;            
+            font-size: 14px;     
         }       
         .container-produto{
             border-radius: 10px;
@@ -139,6 +139,7 @@
         }
         .container-produto:hover{
             box-shadow: 5px 5px 5px #666;
+            text-decoration: none;
         }
             
 

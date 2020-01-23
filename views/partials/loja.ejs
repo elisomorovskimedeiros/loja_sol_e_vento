@@ -1,5 +1,39 @@
+   
     <div class="row container-loja">
-        <div class="col-3 container-produto">
+
+        <div class="col-md-2 container-produto">
+            <a href="#">
+                <div class="foto-produto">
+                    <img src="<%= produtos[0].imagem_produto%>" width="150px">
+                </div>
+                <div class="nome-produto">
+                    <h4><%= produtos[0].nome_produto %></h4>
+                </div>
+                <div class="descricao-produto"> 
+                    <p><%= produtos[0].descricao_produto %> </p>
+                </div>
+                <div class="preco-produto">
+                    <h3>R$<%= produtos[0].preco_produto %></h3>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-2 container-produto">
+            <a href="#">
+                <div class="foto-produto">
+                    <img src="/imagens/refletor10w.png" width="150px">
+                </div>
+                <div class="nome-produto">
+                    <h4>Refletor 10W LED</h4>
+                </div>
+                <div class="descricao-produto"> 
+                    <p>Refletor led 10W luz branca, para uso externo. </p>
+                </div>
+                <div class="preco-produto">
+                    <h3>R$35</h3>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-2 container-produto">
             <div class="foto-produto">
                 <img src="/imagens/refletor10w.png" width="150px">
             </div>
@@ -13,7 +47,7 @@
                 <h3>R$35</h3>
             </div>
         </div>
-        <div class="col-3 container-produto">
+        <div class="col-md-2 container-produto">
             <div class="foto-produto">
                 <img src="/imagens/refletor10w.png" width="150px">
             </div>
@@ -27,21 +61,7 @@
                 <h3>R$35</h3>
             </div>
         </div>
-        <div class="col-3 container-produto">
-            <div class="foto-produto">
-                <img src="/imagens/refletor10w.png" width="150px">
-            </div>
-            <div class="nome-produto">
-                <h4>Refletor 10W LED</h4>
-            </div>
-            <div class="descricao-produto">
-                <p>Refletor led 10W luz branca, para uso externo. </p>
-            </div>
-            <div class="preco-produto">
-                <h3>R$35</h3>
-            </div>
-        </div>
-        <div class="col-3 container-produto">
+        <div class="col-md-2 container-produto">
             <div class="foto-produto">
                 <img src="/imagens/refletor10w.png" width="150px">
             </div>
