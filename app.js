@@ -33,6 +33,7 @@ let resposta = {
 app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(methodOverride("_method"));
 app.use(express.static("public"));
 
@@ -49,12 +50,30 @@ let transporter = nodemailer.createTransport({
 
 //rota principal
 app.get("/", function(req, res){
-    produto.select().then(function(resultado){
-        let produtos = resultado.resultado;
-        res.render("index.ejs", {produtos});
+    produto.select().then(function(resposta){
+        if(!resposta.status){
+            console.log(resposta.resultado);
+        }else{
+            let produtos = resposta.resultado;
+            res.render("index.ejs", {produtos});
+        }
     });
     
 });
+
+//rota da loja
+app.get("/loja", function(req, res){
+    produto.select().then(function(resposta){
+        if(!resposta.status){
+            console.log(resposta.resultado);
+        }else{
+            let produtos = resposta.resultado;
+            res.render("loja/loja_bootstrap.ejs", {produtos});
+        }
+    });
+    
+});
+
 app.get("/como_funciona", function(req, res){
     res.render("construcao.ejs");
 });
@@ -83,10 +102,12 @@ app.get("/controle_produtos", function(req, res){
     });
 });
 
+//janela novo produto
 app.get("/produtos/new", function(req, res){
     res.render("novo_produto.ejs");    
 });
 
+//recebimento do novo produto
 app.post("/produtos", upload.single('imagem_produto'), function(req, res){
     const file = req.file;
     let imagem_produto = '';
@@ -103,17 +124,50 @@ app.post("/produtos", upload.single('imagem_produto'), function(req, res){
     produto.descricao_produto = req.body.descricao_produto;
     
     produto.insert(produto).then(function(resposta){
+        let mensagem;
         if(!resposta.status){
             console.log(resposta);
-            resposta = "Ocorreu um erro na inserção do produto".
-            res.render("novo_produto", {resposta});
+            mensagem = "Ocorreu um erro na inserção do produto";
+            res.render("novo_produto", {mensagem});
             
         }else{
-            resposta = "Produto inserido com sucesso!";
-            res.render("novo_produto", {resposta});
+            mensagem = "Produto inserido com sucesso!";
+            res.render("novo_produto", {mensagem});
         }
     }); 
     
+});
+
+app.put("/produto/:id", upload.single('imagem_produto'), function(req, res){
+    const file = req.file;
+    let imagem_produto = '';
+    if(!file){//caso nenhuma foto tenha sido inserida
+        console.log("não veio foto");
+    }else{
+        imagem_produto = "imagens/"+ file.originalname;
+    }
+    let produto_a_editar = req.body;
+    produto_a_editar.imagem_produto = imagem_produto;
+    
+    produto.update(produto_a_editar).then(function(resposta){
+        if(!resposta.status){
+            console.log(resposta);
+            res.send("Ocorreu um erro na edição do produto");
+        }else{
+            res.send("Editado OK");
+        }
+    });
+});
+
+app.delete("/produto/:id", function(req, res){
+    produto.delete(req.params.id).then(function(resposta){
+        if(!resposta.status){
+            console.log(resposta);
+            res.send("Ocorreu um erro na exclusão do produto");
+        }else{
+            res.send("excluído ok");
+        }
+    });
 });
 
 app.get("/massoterapia", function(req, res){

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Sol e Vento - Capão da Canoa - RS. Artigos de Iluminação & Energia Solar Fotovoltaíca">
+  <meta name="author" content="Eli Somorovski Medeiros">
+
+  <title>Sol e Vento</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap/css/bootstrap.min.css" />
+
+  <!-- Custom styles for this template -->
+  <link href="css/shop-homepage.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top cabecalho" style="background-color: #fba75d;border: 1px solid #e7e7e7;">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img id="logotipoSite" src="/imagens/Logotipo_pequeno.png" height="50" class="d-inline-block align-top" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/quem_somos">Quem Somos</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/contato">Contato</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-lg-3">
+        <div class="my-4">
+          <h1>Sol e Vento</h1>
+          <h5>Capão da Canoa - RS</h5>
+        </div>
+        <!--
+        <div class="list-group">
+          <a href="#" class="list-group-item">Iluminação</a>
+          <a href="#" class="list-group-item">Energia Solar</a>
+        </div>
+      -->
+      </div>
+      <!-- /.col-lg-3 -->
+
+      <div class="col-lg-9">
+
+        <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+          </ol>
+          <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+              <img class="d-block img-fluid" src="imagens/foto1_carrossel.jpg" alt="First slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block img-fluid" src="imagens/foto2_carrossel.jpg" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block img-fluid" src="imagens/foto3_carrossel.jpg" alt="Third slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block img-fluid" src="imagens/foto4_carrossel.jpg" alt="Third slide">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+
+        <div class="row container-loja" id="mostruario">
+
+          <% produtos.forEach(function(produto){ %>
+          <div class="col-lg-4 col-md-6 mb-4 container-produto" data-toggle="modal" data-target="#janela_de_detalhes_do_produto">
+            <a href="#">
+              <div class="card h-100">
+                <img class="card-img-top foto-produto" src="<%= produto.imagem_produto %>" alt="">
+                <div class="card-body">
+                  <h4 class="card-title nome-produto">
+                    <%= produto.nome_produto %>
+                  </h4>
+                  <h5 class="preco-produto">R$<%=produto.preco_produto %></h5>
+                  <p class="card-text descricao-produto"><%= produto.descricao_produto %></p>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                </div>
+              </div>
+            </a>
+          </div>
+          <% }); %>
+        </div>
+        <!-- /.row -->
+
+      </div>
+      <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Sol e Vento 2020 | Responsável Técnico: Eli Somorovski Medeiros</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Janela de detalhes do produto -->
+<div class="modal fade" id="janela_de_detalhes_do_produto">              
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- cabecalho -->
+            
+               
+                <div class="modal-header">
+                    <h4 class="modal-title">Detalhes do Produto</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"  id="fecharModal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>            
+                <!-- corpo -->
+                <div class="modal-body" id="corpoModal">
+                  <div class="card mt-4">
+                    <img class="card-img-top img-fluid" src="" id="imagem_produto_mostruario" alt="">
+                      <div class="card-body">
+                        <h3 class="card-title" id="nome_produto_mostruario">Product Name</h3>
+                        <h4 id="preco_produto_mostruario">$24.99</h4>
+                        <p class="card-text" id="descricao_produto_mostruario">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
+                        
+                      </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-light" id="fechar_modal">Cancelar</button>
+                  <button type="button" id="btn_pedir" class="btn btn-success">Solicitar Produto</button>
+                </div>
+        </div>    
+    </div>
+</div>
+
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="/js/jquery-3.4.1.min.js"></script>
+  <script src="/css/bootstrap/js/bootstrap.js"></script>
+  <script src="/js/variaveis_globais.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/escutas_jquery.js"></script>
+  <!--<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+
+</body>
+
+</html>

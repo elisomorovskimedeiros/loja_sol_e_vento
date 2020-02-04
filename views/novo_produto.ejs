@@ -11,7 +11,7 @@
                 <input type="text" class="form-control" name="nome_produto">
             </div>
             <div class="form-group col-md-6">
-                <label>Foto do Produto</label>
+                <label>Foto do Produto (foto sem fundo 700x400px)</label>
                 <input type="file" class="form-control-file" name="imagem_produto">
             </div>
             <div class="form-group col-md-6">
@@ -37,8 +37,8 @@
     </form>
 </div>
 
-<% if (typeof resposta != 'undefined'){ %>
-    <input type="text" id="resposta_insercao_produto" style="display: none;" value="<%= resposta %>">
+<% if (typeof mensagem != 'undefined'){ %>
+    <input type="text" id="resposta_insercao_produto" style="display: none;" value="<%= mensagem %>">
 <% } %>    
 <div id="snackbar"></div>
 

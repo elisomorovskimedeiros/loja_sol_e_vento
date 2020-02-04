@@ -1,78 +1,68 @@
-   
-    <div class="row container-loja">
-
-        <div class="col-md-2 container-produto">
-            <a href="#">
-                <div class="foto-produto">
-                    <img src="<%= produtos[0].imagem_produto%>" width="150px">
+<div class="container">
+    <h1>Mostruário de produtos de iluminação e solares:</h1>
+    <h4>Por enquanto não tem como comprar pelo site. Mas clicando no produto você o solicita por email ou WhatsApp</h4>
+    <h4>Consulte a taxa de entrega, para Capão da Canoa e Xangri-lá é feita no mesmo dia.</h4>
+    <div class="row container container-loja" id="mostruario">
+        <% produtos.forEach(function(produto, indice){ %>
+            <div class="col-md-3 container-produto" data-toggle="modal" data-target="#janela_de_detalhes_do_produto">
+                <div>
+                    <img class="foto-produto" src="<%= produto.imagem_produto%>" width="150px">
                 </div>
-                <div class="nome-produto">
-                    <h4><%= produtos[0].nome_produto %></h4>
+                <div>
+                    <h4 class="nome-produto"><%= produto.nome_produto %></h4>
+                    (Código: <%= produto.pn_produto %>)
                 </div>
-                <div class="descricao-produto"> 
-                    <p><%= produtos[0].descricao_produto %> </p>
+                <div> 
+                    <p class="descricao-produto"><%= produto.descricao_produto %> </p>
                 </div>
-                <div class="preco-produto">
-                    <h3>R$<%= produtos[0].preco_produto %></h3>
+                <div>
+                    <h3><span>R$</span><span class="preco-produto"><%= produto.preco_produto %></span></h3>
                 </div>
-            </a>
-        </div>
-        <div class="col-md-2 container-produto">
-            <a href="#">
-                <div class="foto-produto">
-                    <img src="/imagens/refletor10w.png" width="150px">
-                </div>
-                <div class="nome-produto">
-                    <h4>Refletor 10W LED</h4>
-                </div>
-                <div class="descricao-produto"> 
-                    <p>Refletor led 10W luz branca, para uso externo. </p>
-                </div>
-                <div class="preco-produto">
-                    <h3>R$35</h3>
-                </div>
-            </a>
-        </div>
-        <div class="col-md-2 container-produto">
-            <div class="foto-produto">
-                <img src="/imagens/refletor10w.png" width="150px">
             </div>
-            <div class="nome-produto">
-                <h4>Refletor 10W LED</h4>
-            </div>
-            <div class="descricao-produto">
-                <p>Refletor led 10W luz branca, para uso externo. </p>
-            </div>
-            <div class="preco-produto">
-                <h3>R$35</h3>
-            </div>
-        </div>
-        <div class="col-md-2 container-produto">
-            <div class="foto-produto">
-                <img src="/imagens/refletor10w.png" width="150px">
-            </div>
-            <div class="nome-produto">
-                <h4>Refletor 10W LED</h4>
-            </div>
-            <div class="descricao-produto">
-                <p>Refletor led 10W luz branca, para uso externo. </p>
-            </div>
-            <div class="preco-produto">
-                <h3>R$35</h3>
-            </div>
-        </div>
-        <div class="col-md-2 container-produto">
-            <div class="foto-produto">
-                <img src="/imagens/refletor10w.png" width="150px">
-            </div>
-            <div class="nome-produto">
-                <h4>Refletor 10W LED</h4>
-            </div>
-            <div class="descricao-produto">
-                <p>Refletor led 10W luz branca, para uso externo. </p>
-            </div>
-            <div class="preco-produto">
-                <h3>R$35</h3>
-            </div>
-        </div>         
+        <% }); %>
     </div>
+</div>
+
+<!-- Janela de detalhes do produto -->
+<div class="modal fade" id="janela_de_detalhes_do_produto">              
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- cabecalho -->
+            
+               
+                <div class="modal-header">
+                    <h4 class="modal-title">Detalhes do Produto</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"  id="fecharModal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>            
+                <!-- corpo -->
+                <div class="modal-body" id="corpoModal">
+                    <div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img src="" id="foto_produto">
+                            </div>
+                            <div class="col-md-12 input_mostruario">
+                                <p id="nome_produto_mostruario"></p>
+                                
+                                <p id="pn_produto_mostruario"></p>
+                            </div>
+                            <div class="col-md-12 input_mostruario">
+                                <p id="pn_produto_mostruario"></p>
+                            </div>
+                            <div class="col-md-12 input_mostruario">
+                                <p id="preco_produto_mostruario"></p>
+                            </div>
+                            <div class="col-md-12 input_mostruario">
+                                <p id="qtd_produto_mostruario"></p>
+                            </div>
+                            <div class="col-md-12 input_mostruario">
+                                <p id="descricao_produto_mostruario"></p> 
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+        </div>    
+    </div>
+</div>

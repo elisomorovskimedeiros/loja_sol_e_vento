@@ -5,12 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Sol e Vento</title>
     <link rel="shortcut icon" href="/imagens/Logotipo.ico" >
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/css/generico.css" />
-    <script src="/js/jquery.min.js"></script>
+
+    <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/css/bootstrap/js/bootstrap.js"></script>
+    <script src="/js/variaveis_globais.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/escutas_jquery.js"></script>
     
@@ -20,26 +22,20 @@
 
 </head>
 <body>
-    <div id="cabecalho" class="row cabecalho">
+    <nav class="navbar navbar-expand-lg navbar-light cabecalho fixed-top">
         <a href="/">
-            <div class="col-8 row left">
-                <div class="col-6 left titulo">
-                    <img id="logotipoSite" src="/imagens/Logotipo_pequeno.png" class="right elementos_div">
-                </div>
-                <div class="col-6 right titulo">
-                    <div class="elementos_div">
-                        <h1 id="tituloSite">Sol e Vento</h1>
-                    </div>                    
-                </div>        
-            </div>
+            <img id="logotipoSite" src="/imagens/Logotipo_pequeno.png" height="70" class="d-inline-block align-top" alt="">                      
         </a>
-        <div id="links_cabecalho" class="col-4 col-s-4 right centralizar_div">
-            
-                <div id="linkCabecalhoEsquerda" class="links-titulo centralizar_div espaco_mobile left"><a href="/quem_somos" >Quem somos?&nbsp;&nbsp;</a></div>
-                <div id="linkCabecalhoDireita" class="links-titulo centralizar_div espaco_mobile right "><a href="/contato" >&nbsp;&nbsp;Contato</a></div>
-           
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Alterna navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(Página atual)</span></a>
+                <a class="nav-item nav-link" href="/quem_somos">Quem Somos</a>
+                <a class="nav-item nav-link" href="/contato">Contato</a>
+                <a class="nav-item nav-link" href="#">Login</a>
+            </div>
         </div>
-    </div>
-     
-
-   
+    </nav>
+    

@@ -35,8 +35,8 @@ class Produto{
     insert(produto){
         let sql = "INSERT INTO produto (nome_produto, ns_produto, pn_produto, imagem_produto, preco_produto, qtd_produto, descricao_produto) VALUES (\'" +
                                             produto.nome_produto + "\'," +
-                                            produto.ns_produto +"," + 
-                                            produto.pn_produto + ", \'" + 
+                                            produto.ns_produto +",\'" + 
+                                            produto.pn_produto + "\', \'" + 
                                             produto.imagem_produto + "\'," + 
                                             produto.preco_produto + "," + 
                                             produto.qtd_produto + ", \'" +

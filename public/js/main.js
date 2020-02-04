@@ -6,6 +6,7 @@ var statusFormContato = {
   mensagem: false
 };
 
+
 //JOGO DE SOMBRA NOS BOTÕES
 function diminuiSombra(elemento){
   elemento.style.boxShadow = "5px 5px 5px #888";
@@ -230,4 +231,18 @@ function emitirAviso(mensagem, id, tempo){
   snackbar.innerHTML = mensagem;
   snackbar.className = "show";
   setTimeout(function(){snackbar.className = snackbar.className.replace("show", ""); }, tempo);
+}
+
+
+function editar_produto(){
+  $('#form_editar_produto').submit();
+}
+
+//função de submit de exclusão do produto
+function alerta_de_exclusao(){
+  $("#form_exclusao_produto").attr("action", "produto/"+produto.id_produto+"?_method=DELETE");
+  let confirmacao = confirm("Você deseja realmente excluir esse produto?");
+  if(confirmacao){
+    $('#form_exclusao_produto').submit();
+  }
 }

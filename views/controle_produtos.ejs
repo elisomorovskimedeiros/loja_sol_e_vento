@@ -5,34 +5,44 @@
         Inserir novo produto
     </a>
     </btn>
+  
     <div class="row container container-loja">
         <% produtos.forEach(function(produto, indice){ %>
             <div class="col-md-2 container-produto" data-toggle="modal" data-target="#janela_de_edicao_de_produto">
-                <a href="#">
-                    <div class="foto-produto">
-                        <img src="<%= produto.imagem_produto%>" width="150px">
+                    <div>
+                        <img class="foto-produto" src="<%= produto.imagem_produto%>" width="150px">
                     </div>
-                    <div class="nome-produto">
-                        <h4><%= produto.nome_produto %></h4>
+                    <div>
+                        <h4 class="nome-produto"><%= produto.nome_produto %></h4>
                     </div>
-                    <div class="descricao-produto"> 
-                        <p><%= produto.descricao_produto %> </p>
+                    <div> 
+                        <span>Id do produto:</span><span class="id-produto"><%= produto.id_produto %></span>
                     </div>
-                    <div class="preco-produto">
-                        <h3>R$<%= produto.preco_produto %></h3>
+                    <div> 
+                        <p class="descricao-produto"><%= produto.descricao_produto %> </p>
                     </div>
-                </a>
+                    <div> 
+                        <span>Código do produto: </span><span class="pn-produto"><%= produto.pn_produto %></span>
+                    </div>
+                    <div> 
+                        <span>Qtd em estoque: </span><span class="qtd-produto"><%= produto.qtd_produto %></span>
+                    </div>
+                    <div>
+                        <h3><span>R$</span><span class="preco-produto"><%= produto.preco_produto %></span></h3>
+                    </div>
+           
             </div>
         <% }); %>
     </div>
 </div> 
 
-<!-- Janela de Inserção de brinquedo no evento -->
+<!-- Janela de edição do produto -->
 <div class="modal fade" id="janela_de_edicao_de_produto">              
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <!-- cabecalho -->
-            <form id="form_editar_produto">
+            
+               
                 <div class="modal-header">
                     <h4 class="modal-title" id="tituloInsercaoBrinquedo">Editar Produto</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"  id="fecharModal">
@@ -42,55 +52,70 @@
                 <!-- corpo -->
                 <div class="modal-body" id="corpoModal">
                     <div>
+                        <form id="form_editar_produto" action="" name="form_editar_produto" method="POST" enctype=multipart/form-data>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label>Nome do Produto</label>
-                                <input type="text" class="form-control" name="nome_produto">
+                                <input type="text" class="form-control" name="nome_produto" id="nome_produto_edicao">
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Foto do Produto</label>
-                                <input type="file" class="form-control-file" name="imagem_produto">
+                                <label>Foto do Produto (foto sem fundo 700x400px)</label>
+                                <input type="file" class="form-control-file" name="imagem_produto" id="imagem_produto_edicao">
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
+                                <label>Id do Produto</label>
+                                <input type="text" readonly class="form-control" name="id_produto" id="id_produto_edicao">
+                            </div>
+                            <div class="form-group col-md-4">
                                 <label>Código do Produto</label>
-                                <input type="text" class="form-control" name="pn_produto">
+                                <input type="text" class="form-control" name="pn_produto" id="pn_produto_edicao">
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label>Preço do Produto</label>
-                                <input type="number" class="form-control" name="preco_produto">
+                                <input type="number" class="form-control" name="preco_produto" id="preco_produto_edicao">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Quantidade em Estoque</label>
-                                <input type="text" class="form-control" name="qtd_produto">
+                                <input type="text" class="form-control" name="qtd_produto" id="qtd_produto_edicao">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Descrição do Produto</label>
-                                <input type="text" class="form-control" name="descricao_produto">
+                                <input type="text" class="form-control" name="descricao_produto" id="descricao_produto_edicao">
                             </div>
                         </div>
+                        </form>
                     </div> 
                 </div>
                 <!-- rodape -->
                 <div class="modal-footer">
                     <div class="container d-flex">
                         <div class="p-2">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <form action="" method="POST" id="form_exclusao_produto"></form>
+                            <button type="button" class="btn btn-danger" id="botao_excluir_produto" data-dismiss="modal" onclick="alerta_de_exclusao()">
                                 Excluir Produto
                             </button>
                         </div>
                         <div class="ml-auto p-2">
                             <button type="button" class="btn btn-light" data-dismiss="modal">
                                 Cancelar
-                            </button>
-                            <button type="button" class="btn btn-success" data-dismiss="modal">
+                            </button>                            
+                            <button type="button" name="btn_ok_editar_produto" class="btn btn-success" data-dismiss="modal" onclick="editar_produto()">
                                 OK
                             </button>
                         </div>
                     </div>
-                </div>   
-            </form>
+                </div>
+             
+            
         </div>    
     </div>
 </div>
-    <!-- fechamento do modal de inserção de brinquedo no evento -->
+
+<% if (typeof mensagem != 'undefined'){ %>
+    <input type="text" id="resposta_insercao_produto" style="display: none;" value="<%= mensagem %>">
+<% } %>    
+<div id="snackbar"></div>
+
+<% include partials/rodape %>
+    <!-- fechamento do modal de edição do produto -->
 <% include partials/rodape %> 
