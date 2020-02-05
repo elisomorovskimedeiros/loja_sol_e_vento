@@ -1,5 +1,5 @@
 const Db = require("./Db");
-const db = new Db();
+var db = new Db();
 
 class Produto{
     constructor(){
@@ -11,13 +11,20 @@ class Produto{
         this.preco_produto = null;
         this.qtd_produto = null;
         this.descricao_produto = null;
-        this.query = function(sql, variavel){
+        this.query = async function(sql, variavel){
+            if(db.connection.state === 'disconected'){
+                db = new Db();
+            }
             return new Promise(function(resolve, reject){
                 db.connection.query(sql, variavel, function(err, resultado){
-                    //db.connection.end();
                     if(err){
-                        return resolve({status: false,
+                        if(err.errno == "ECONNRESET"){
+                            console.log("Precisou resetar a conexão!");
+                            db = new Db();
+                        }else{
+                            return resolve({status: false,
                                 resultado: err});
+                        }                        
                     }else{
                         return resolve({status: true,
                                 resultado: resultado});

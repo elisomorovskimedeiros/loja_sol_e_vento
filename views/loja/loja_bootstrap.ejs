@@ -16,6 +16,7 @@
   <!-- Custom styles for this template -->
   <link href="css/shop-homepage.css" rel="stylesheet">
 
+
 </head>
 
 <body>
@@ -113,11 +114,10 @@
                   <h4 class="card-title nome-produto">
                     <%= produto.nome_produto %>
                   </h4>
-                  <h5 class="preco-produto">R$<%=produto.preco_produto %></h5>
+                  <h5>R$<span class="preco-produto"><%=produto.preco_produto %></span></h5>
                   <p class="card-text descricao-produto"><%= produto.descricao_produto %></p>
                 </div>
-                <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                <div class="card-footer">                  
                 </div>
               </div>
             </a>
@@ -160,21 +160,104 @@
                 <div class="modal-body" id="corpoModal">
                   <div class="card mt-4">
                     <img class="card-img-top img-fluid" src="" id="imagem_produto_mostruario" alt="">
-                      <div class="card-body">
-                        <h3 class="card-title" id="nome_produto_mostruario">Product Name</h3>
-                        <h4 id="preco_produto_mostruario">$24.99</h4>
-                        <p class="card-text" id="descricao_produto_mostruario">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
-                        
-                      </div>
+                    <div class="card-body">
+                      <h3 class="card-title" id="nome_produto_mostruario">Product Name</h3>
+                      <h4>R$<span id="preco_produto_mostruario"></span></h4>
+                      <p class="card-text" id="descricao_produto_mostruario">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p> 
                     </div>
+                  </div>    
                 </div>
-                <div class="modal-footer">
-                  <button type="button" data-dismiss="modal" class="btn btn-light" id="fechar_modal">Cancelar</button>
-                  <button type="button" id="btn_pedir" class="btn btn-success">Solicitar Produto</button>
+                <div class="modal-footer d-flex mb-3">
+                    <div class="mr-auto p-2">
+                      <button type="button" data-dismiss="modal" class="btn btn-light" id="fechar_modal">Cancelar</button>
+                    </div>
+                    <div class="form-group p-2">
+                      <label>Quantidade:</label>
+                      <input type="number" id="quantidade_produto" class="form-control" min="1" max="10" style="width: 70px;" value="1">
+                    </div>
+                    <div class="p-2">
+                      <button type="button" id="btn_enviar_carrinho" class="btn btn-success">Enviar para o carrinho</button>
+                    </div>
                 </div>
         </div>    
     </div>
 </div>
+<!-- Fim dos detalhes do produto -->
+
+<!-- Carrinho de compras -->
+<div class="modal fade" id="carrinho_de_compras">              
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- cabecalho -->
+            
+               
+                <div class="modal-header">
+                    <h4 class="modal-title">Carrinho de compras</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"  id="fecharModalCarrinho">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>            
+                <!-- corpo -->
+                <div class="modal-body" id="corpoModalCarrinho">                  
+                  <div class="row">
+                      <div class="form-group col-md-4">
+                        <label>
+                          Nome:
+                        </label>
+                        <input type="text" id="nome_cliente" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>
+                          Telefone:
+                        </label>
+                        <input type="text" id="telefone_cliente" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>
+                          Endereço:
+                        </label>
+                        <input type="text" id="endereco_cliente" class="form-control">
+                      </div>
+                        
+                    </div>    
+                </div>
+                <div class="modal-footer">
+                  <div>
+                    <button type="button" data-dismiss="modal" class="btn btn-light" id="fechar_modal_carrinho">Continuar Escolhendo</button>
+                    <button type="button" id="btn_finalizar_compra" class="btn btn-success">Finalizar Pedido</button>
+                  </div>
+                </div>
+        </div>    
+    </div>
+</div>
+<!-- Fim do carrinho -->
+
+<!-- bloco de produto no carrinho-->
+<div class="card mt-4 invisible float" id="bloco_produto_carrinho">
+  <div class="row d-flex align-items-center">
+    <img class="col-md-2 imagem_produto_carrinho" src="" width="50px" alt="">
+    <h4 class="col-md-2 nome_produto_carrinho" >Product Name</h4>
+    <h4 class="col-md-2">R$<span class="preco_produto_carrinho"></span></h4>
+    <div class="col-md-2 form-group">
+      <label>Qtd:</label>
+      <input type="number" class="form-control quantidade_produto" style="width: 70px;" min="1" max="10" value="1">
+    </div>                      
+    <div class="col-md-2">
+        <h5>Total: R$<span class="total_do_item"></span></h5>
+    </div>
+    <div class="col-md-2 text-danger fake_de_link lixeira">
+      <img src="imagens/lixeira_vermelha_40x80.png" style="padding-left: 9px;">
+      Remover
+    </div>
+  </div>
+</div>
+<!-- fim do bloco de produto no carrinho-->
+
+<!-- Contato via WhatsApp -->
+
+<img src="/imagens/whatsapp-icone-60x60.png" id="icone_whatsapp" class="fake_de_link">
+
+
 
 
 

@@ -1,1 +1,2 @@
-var produto = {}
+var produto = {};
+var produtos = [];

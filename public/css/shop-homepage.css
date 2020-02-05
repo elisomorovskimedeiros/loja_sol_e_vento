@@ -6,3 +6,23 @@
 body {
   padding-top: 56px;
 }
+
+#icone_whatsapp{
+  position: fixed;
+  bottom: 4vw;
+  right: 4vw;
+}
+
+.fake_de_link:hover{
+  cursor: pointer;
+}
+
+.foto-produto{
+  padding: 5px;
+}
+
+
+#corpoModal > div{
+  margin: 5px;
+}
+
