@@ -46,6 +46,9 @@
           <li class="nav-item active">
             <a class="nav-link" href="#">Login</a>
           </li>
+          <li class="nav-item active nav-link fake_de_link" id="link_carrinho">
+            Carrinho
+          </li>
         </ul>
       </div>
     </div>
@@ -198,8 +201,9 @@
                     </button>
                 </div>            
                 <!-- corpo -->
-                <div class="modal-body" id="corpoModalCarrinho">                  
-                  <div class="row">
+                <div class="modal-body" id="corpoModalCarrinho">
+                  <div id="conteudo_carrinho"></div>                  
+                  <div class="row" id="dados_cliente">
                       <div class="form-group col-md-4">
                         <label>
                           Nome:
@@ -240,10 +244,10 @@
     <h4 class="col-md-2">R$<span class="preco_produto_carrinho"></span></h4>
     <div class="col-md-2 form-group">
       <label>Qtd:</label>
-      <input type="number" class="form-control quantidade_produto" style="width: 70px;" min="1" max="10" value="1">
+      <input type="number" class="form-control quantidade_produto_carrinho" style="width: 70px;" min="1" max="10">
     </div>                      
     <div class="col-md-2">
-        <h5>Total: R$<span class="total_do_item"></span></h5>
+        <h5>Total do item: R$<span class="total_do_item"></span></h5>
     </div>
     <div class="col-md-2 text-danger fake_de_link lixeira">
       <img src="imagens/lixeira_vermelha_40x80.png" style="padding-left: 9px;">

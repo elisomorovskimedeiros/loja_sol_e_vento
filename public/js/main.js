@@ -246,3 +246,20 @@ function alerta_de_exclusao(){
     $('#form_exclusao_produto').submit();
   }
 }
+
+function preencherConteudoCarrinho(){
+  $("#conteudo_carrinho").html("");
+  produtos.forEach(function(produto_em_compra, indice){
+    let div_criada = ($("#bloco_produto_carrinho").clone()
+                                        .appendTo("#conteudo_carrinho"))
+                                        .attr("id", indice)
+                                        .removeClass("invisible")
+                                        .removeClass("float")[0];
+    $($(div_criada).find(".imagem_produto_carrinho")[0]).attr("src", produto_em_compra.foto_produto);    
+    $($(div_criada).find(".nome_produto_carrinho")[0]).html(produto_em_compra.nome_produto);
+    $($(div_criada).find(".preco_produto_carrinho")[0]).html(produto_em_compra.preco_produto);   
+    $($(div_criada).find(".quantidade_produto_carrinho")[0]).val(produto_em_compra.quantidade_produto);
+    $($(div_criada).find(".total_do_item")[0]).html(Number(produto_em_compra.quantidade_produto)*Number(produto_em_compra.preco_produto));
+    $($(div_criada).find(".lixeira")[0]).attr("indice",indice);
+  });
+}

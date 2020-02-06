@@ -3,7 +3,6 @@ $(document).ready(function(){
     if($("#resposta_insercao_produto").length && $("#resposta_insercao_produto").val() != ''){
         emitirAviso($("#resposta_insercao_produto").val(), "snackbar", 3000);
     }
-
     //abre o modal de edição do produto
     $(".container-produto").click(function(e){
         
@@ -40,8 +39,9 @@ $(document).ready(function(){
        
     });
     //zera a variável global produtos quando o modal que destacou o produto é fechado
-    $("#janela_de_detalhes_do_produto, #janela_de_edicao_de_produto").on("bs.modal.hide", function(){
+    $("#janela_de_detalhes_do_produto, #janela_de_edicao_de_produto").on("hide.bs.modal", function(){
         produto = {};
+        $("#quantidade_produto").val("1");
     });
 
 
@@ -88,34 +88,47 @@ $(document).ready(function(){
     });
 
     $("#btn_enviar_carrinho").click(function(e){
-        produto.quantidade_produto = $("#quantidade_produto").val();
-        produtos.push(produto);
+        let produto_em_compra = $.extend(true, {}, produto);
+        produto_em_compra.quantidade_produto = $("#quantidade_produto").val();
+        console.log("quantidade produtos:");
+        console.log($("#quantidade_produto").val());
+        console.log("produtos:");
+        console.log(produtos);
+        produtos.push(produto_em_compra);
         $("#janela_de_detalhes_do_produto").modal("hide");
         $("#carrinho_de_compras").modal("show");
     });
 
     $("#carrinho_de_compras").on("show.bs.modal", function(){
-        console.log(produtos);
         if(produtos.length == 0){
-            $("#corpoModalCarrinho").html("<h1>Carrinho de compras vazio</h1>");
+            console.log("Produtos dentro do if do show modal");
+            console.log(produtos);
+            $("#conteudo_carrinho").html("<h1>Carrinho de compras vazio</h1>");
+            $("#dados_cliente").hide();
+            $("#btn_finalizar_compra").hide();
         }else{
-            produtos.forEach(function(produto, indice){
-                let div_criada = ($("#bloco_produto_carrinho").clone()
-                                                    .appendTo("#corpoModalCarrinho")
-                                                    .attr("id", "produto"+indice)
-                                                    .removeClass("invisible")
-                                                    .removeClass("float"))[0];
-                $(div_criada).find($(".imagem_produto_carrinho").attr("src", produto.foto_produto));
-                $(div_criada).find($(".nome_produto_carrinho").html(produto.nome_produto));   
-                $(div_criada).find($(".preco_produto_carrinho").html(produto.preco_produto));
-                $(div_criada).find($(".quantidade_produto").html(produto.quantidade_produto));
-                $(div_criada).find($(".total_do_item").html(Number(produto.quantidade_produto)*Number(produto.preco_produto)));
-                $(div_criada).find($(".lixeira").attr("indice",indice));             
-            });
-            
+            $("#dados_cliente").show();
+            $("#btn_finalizar_compra").show();
+            preencherConteudoCarrinho();
         }
     });
 
+    $(document).on("click",".lixeira", function(e){
+        produtos.pop($(e.currentTarget).attr("indice"));
+        $("#conteudo_carrinho").html("");
+        if(produtos.length == 0){
+            $("#conteudo_carrinho").html("<h1>Carrinho de compras vazio</h1>");
+            $("#dados_cliente").hide();
+            $("#btn_finalizar_compra").hide();
+        }else{
+            preencherConteudoCarrinho();
+        }
+    });
+/*
+    $("#carrinho_de_compras").on("hide.bs.modal", function(){
+        $("#conteudo_carrinho").html("");
+    });
+*/
     //pedido de produto
     $("#btn_comprar").click(function(e){ 
         cliente.nome = $("#nome_cliente").val();
@@ -123,4 +136,15 @@ $(document).ready(function(){
         cliente.endereco = $("#endereco_cliente").val();
         enviarEmail(produto, cliente);       
     });
+
+    //recalcula o valor total de cada produto noso do cliente pedir mais um no carrinho
+    $(document).on("change", ".quantidade_produto_carrinho", function(e){
+        let produto_acrescentado = $(e.currentTarget).parent().parent();
+        $(produto_acrescentado).find(".total_do_item").html(Number($($(produto_acrescentado).find(".preco_produto_carrinho")[0]).html()) * Number($(e.currentTarget).val()))
+    });
+    
+    //exibir carrinho
+    $("#link_carrinho").click(function(){
+        $("#carrinho_de_compras").modal("show");
+    })
 });
