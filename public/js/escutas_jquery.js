@@ -13,7 +13,7 @@ $(document).ready(function(){
         produto.preco_produto = $(e.currentTarget).find($(".preco-produto")).html();
         produto.descricao_produto = $(e.currentTarget).find($(".descricao-produto")).html();
         produto.id_produto = $(e.currentTarget).find($(".id-produto")).html();
-
+        console.log(produto);
         if($(e.currentTarget).parent().attr("id") == "mostruario"){ //true caso seja aberto em detalhes de produto no mostruario
             $("#nome_produto_mostruario").html(produto.nome_produto);
             $("#imagem_produto_mostruario").attr("src", produto.foto_produto);
@@ -23,8 +23,6 @@ $(document).ready(function(){
             $("#qtd_produto_mostruario").html(produto.qtd_estoque);
             $("#id_produto_mostruario").html(produto.id_produto);
         }else{ //true caso seja utilizada para edição do produto em controle de produtos
-            console.log("edição de produtos");
-            console.log(produto.nome_produto);
             $("#nome_produto_edicao").val(produto.nome_produto);
             //$("#imagem_produto_edicao").val(foto_produto);
             $("#pn_produto_edicao").val(produto.codigo_produto);
@@ -94,7 +92,18 @@ $(document).ready(function(){
         console.log($("#quantidade_produto").val());
         console.log("produtos:");
         console.log(produtos);
-        produtos.push(produto_em_compra);
+        //laço que pesquisa se o produto já existe no carrinho
+        let ja_existe_no_carrinho = false;
+        produtos.forEach(produto_do_carrinho => {
+            if (produto_em_compra.id_produto == produto_do_carrinho.id_produto){
+                produto_do_carrinho.quantidade_produto = Number(produto_em_compra.quantidade_produto) + Number(produto_do_carrinho.quantidade_produto);
+                ja_existe_no_carrinho = true;
+            }
+        });
+        //caso ainda não esteja no carrinho, o produto é adicionado
+        if(!ja_existe_no_carrinho){
+            produtos.push(produto_em_compra);
+        }
         $("#janela_de_detalhes_do_produto").modal("hide");
         $("#carrinho_de_compras").modal("show");
     });
@@ -104,14 +113,23 @@ $(document).ready(function(){
             console.log("Produtos dentro do if do show modal");
             console.log(produtos);
             $("#conteudo_carrinho").html("<h1>Carrinho de compras vazio</h1>");
+            /*
             $("#dados_cliente").hide();
             $("#btn_finalizar_compra").hide();
+            */
         }else{
-            $("#dados_cliente").show();
+            //$("#dados_cliente").show();
             $("#btn_finalizar_compra").show();
             preencherConteudoCarrinho();
         }
     });
+
+    $("#carrinho_de_compras").on("hide.bs.modal", function(){
+        $("#conteudo_carrinho").html("");
+        $("#btn_finalizar_compra").css("display", "initial");
+        $("#btn_enviar_compra").css("display", "none");
+    });
+
 
     $(document).on("click",".lixeira", function(e){
         produtos.pop($(e.currentTarget).attr("indice"));
@@ -124,11 +142,7 @@ $(document).ready(function(){
             preencherConteudoCarrinho();
         }
     });
-/*
-    $("#carrinho_de_compras").on("hide.bs.modal", function(){
-        $("#conteudo_carrinho").html("");
-    });
-*/
+
     //pedido de produto
     $("#btn_comprar").click(function(e){ 
         cliente.nome = $("#nome_cliente").val();
@@ -137,14 +151,56 @@ $(document).ready(function(){
         enviarEmail(produto, cliente);       
     });
 
-    //recalcula o valor total de cada produto noso do cliente pedir mais um no carrinho
+    //recalcula o valor total de cada produto no caso do cliente pedir mais um no carrinho
     $(document).on("change", ".quantidade_produto_carrinho", function(e){
-        let produto_acrescentado = $(e.currentTarget).parent().parent();
-        $(produto_acrescentado).find(".total_do_item").html(Number($($(produto_acrescentado).find(".preco_produto_carrinho")[0]).html()) * Number($(e.currentTarget).val()))
+        let div_produto_acrescentado = $(e.currentTarget).parent().parent().parent();
+        let produto_acrescentado = produtos[div_produto_acrescentado[0].id];
+        let preco_produto = Number(produto_acrescentado.preco_produto);
+        let quantidade_produto = Number($(e.currentTarget).val());
+        let total_do_item = preco_produto * quantidade_produto;
+        produto_acrescentado.total_do_item = total_do_item;
+        produto_acrescentado.quantidade_produto = quantidade_produto;
+        //let total_do_item = Number($($(produto_acrescentado).find(".preco_produto_carrinho")[0]).html()) * Number($(e.currentTarget).val());
+        $(div_produto_acrescentado).find(".total_do_item").html(total_do_item);
+        //produtos[].quantidade_produto = total_do_item; 
+        calculo_do_total_da_compra();
     });
     
     //exibir carrinho
     $("#link_carrinho").click(function(){
         $("#carrinho_de_compras").modal("show");
     })
+
+    //finalizar pedido e inserir dados do cliente
+    $("#btn_finalizar_compra").click(function(){
+        $("#conteudo_carrinho").html("");
+        let bloco_dados_cliente = $(".bloco_dados_cliente").clone().appendTo("#dados_cliente");
+        bloco_dados_cliente.find(".div_nome_cliente").attr("id", "nome_cliente");
+        bloco_dados_cliente.find(".div_telefone_cliente").attr("id", "telefone_cliente");
+        bloco_dados_cliente.find(".div_endereco_cliente").attr("id", "endereco_cliente");
+        $("#btn_finalizar_compra").css("display", "none");
+        $("#btn_enviar_compra").css("display", "initial");
+    });
+
+    $("#btn_enviar_compra").click(function(){
+        
+        venda = {
+            'produtos': produtos,
+            'nome_cliente': $("#nome_cliente").val(),
+            'telefone_cliente': $("#telefone_cliente").val(),
+            'endereco_cliente': $("#endereco_cliente").val()
+        }
+        produtos = [];
+        $("#btn_enviar_compra").css("display", "none");
+        
+        $("#carrinho_de_compras").modal("hide");
+        
+        let url = "/venda";
+        $.post( url, 
+            venda,
+            function(resposta, status){
+                emitirAviso(resposta, "snackbar", 10000);
+            }
+        );
+    });
 });

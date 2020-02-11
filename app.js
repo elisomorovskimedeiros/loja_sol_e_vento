@@ -5,7 +5,8 @@ const     express = require("express");
        nodemailer = require('nodemailer'),
         Principal = require("./controller/principal"),
         Produto = require("./model/Produto"),
-        multer  = require('multer');//upload de arquivos
+        multer  = require('multer'),//upload de arquivos
+        Email = require("./model/Email");//envio de emails
 
 
 //utilizado o midlleware Multer para captura do upload do arquivo contendo a foto dos produtos
@@ -55,20 +56,20 @@ app.get("/", function(req, res){
             console.log(resposta.resultado);
         }else{
             let produtos = resposta.resultado;
-            res.render("index.ejs", {produtos});
+            res.render("loja", {produtos});
         }
     });
     
 });
 
 //rota da loja
-app.get("/loja", function(req, res){
+app.get("/index", function(req, res){
     produto.select().then(function(resposta){
         if(!resposta.status){
             console.log(resposta.resultado);
         }else{
             let produtos = resposta.resultado;
-            res.render("loja/loja_bootstrap.ejs", {produtos});
+            res.render("index", {produtos});
         }
     });
     
@@ -229,6 +230,20 @@ app.post("/mandarMensagem", function(req, res){
         console.log("email e whats vieram vazios");
     }   
     //mensagem de envio ok: 250 2.0.0 OK  1551923466 o2sm2274213qtf.46 - gsmtp
+});
+
+app.post("/venda", function(req, res){
+    let email = new Email();
+    email.enviarEmailDeVenda(req.body.produtos, {nome_cliente: req.body.nome_cliente,
+                                                    endereco_cliente: req.body.endereco_cliente,
+                                                    telefone_cliente: req.body.telefone_cliente}
+    ).then(function(retorno){
+        if(retorno){
+            res.send("Compra realizada!<br>Aguarde que em pouco tempo entraremos em contato para combinar a entrega");
+        }else{
+            res.send("Ocorreu um erro no envio da compra");
+        }
+    });
 });
 
 

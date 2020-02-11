@@ -262,4 +262,44 @@ function preencherConteudoCarrinho(){
     $($(div_criada).find(".total_do_item")[0]).html(Number(produto_em_compra.quantidade_produto)*Number(produto_em_compra.preco_produto));
     $($(div_criada).find(".lixeira")[0]).attr("indice",indice);
   });
+  calculo_do_total_da_compra();
+}
+
+function calculo_do_total_da_compra(){
+  let totais_dos_itens = $("#conteudo_carrinho").find(".total_do_item");
+  let total_da_compra = 0;
+  for(let indice = 0; indice < totais_dos_itens.length; indice++){
+    let valor_total_do_item = Number($(totais_dos_itens[indice]).html());
+    total_da_compra += valor_total_do_item;
+  }
+  $("#campo_valor_total").html(total_da_compra);
+  console.log($("#campo_valor_total"));
+}
+
+//validação do campo nome_cliente
+function validaNome(campo){
+  let nome = campo.value;
+  let temEspaco = false;
+  //verificação de espaço no campo nome_cliente
+  if(campo.id == "nome_"){ 
+      for(let i = 0; i < nome.length; i++){
+          if(nome[i] == " "){
+              temEspaco = true;
+          }
+      }        
+  }else{
+      temEspaco = true;
+  }
+  
+  if(temEspaco && nome.length > 2){
+      if(campo.classList.contains("is-invalid")){
+          campo.classList.remove("is-invalid");
+      }
+      campo.classList.add("is-valid");
+  }else{
+      if(campo.classList.contains("is-valid")){
+          campo.classList.remove("is-valid");
+      }
+      campo.classList.add("is-invalid");
+  }
 }
