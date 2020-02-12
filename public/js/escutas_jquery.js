@@ -201,8 +201,10 @@ $(document).ready(function(){
         }
         venda = {
             'produtos': produtos,
-            'cliente': cliente
+            'cliente': cliente,
+            'valor_total': $("#campo_valor_total").html()
         }
+        
         produtos = [];
         $("#btn_enviar_compra").css("display", "none");
         

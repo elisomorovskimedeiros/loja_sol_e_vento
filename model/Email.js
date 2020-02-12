@@ -36,7 +36,7 @@ class Email{
         });        
     }
 
-    async enviarEmailDeVenda(produtos, dadosCliente){
+    async enviarEmailDeVenda(produtos, dadosCliente, valor_total){
         let email = this;
         let mensagem = "Nova venda pelo site!\n" +
                         "Venda para: " +
@@ -51,8 +51,10 @@ class Email{
                         "Produtos: \n";
         produtos.forEach(function(produto){
             mensagem += produto.nome_produto +
-                        " - quantidade: " + produto.quantidade_produto + "\n";
+                        " - quantidade: " + produto.quantidade_produto + "\n" +
+                        " - total do item: " + produto.total_do_item + "\n";
         });
+        mensagem += "Valor da venda: R$" + valor_total;
 
         console.log(mensagem);
 
