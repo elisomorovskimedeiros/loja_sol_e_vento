@@ -234,10 +234,7 @@ app.post("/mandarMensagem", function(req, res){
 
 app.post("/venda", function(req, res){
     let email = new Email();
-    email.enviarEmailDeVenda(req.body.produtos, {nome_cliente: req.body.nome_cliente,
-                                                    endereco_cliente: req.body.endereco_cliente,
-                                                    telefone_cliente: req.body.telefone_cliente}
-    ).then(function(retorno){
+    email.enviarEmailDeVenda(req.body.produtos, req.body.cliente).then(function(retorno){
         if(retorno){
             res.send("Compra realizada!<br>Aguarde que em pouco tempo entraremos em contato para combinar a entrega");
         }else{

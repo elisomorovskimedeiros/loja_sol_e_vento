@@ -273,7 +273,6 @@ function calculo_do_total_da_compra(){
     total_da_compra += valor_total_do_item;
   }
   $("#campo_valor_total").html(total_da_compra);
-  console.log($("#campo_valor_total"));
 }
 
 //validação do campo nome_cliente

@@ -115,9 +115,7 @@
               <div class="card h-100">
                 <img class="card-img-top foto-produto" src="<%= produto.imagem_produto %>" alt="">
                 <div class="card-body">
-                  <h4 class="card-title nome-produto">
-                    <%= produto.nome_produto %>
-                  </h4>
+                  <h4 class="card-title nome-produto"><%= produto.nome_produto %></h4>
                   <h5>R$<span class="preco-produto"><%= produto.preco_produto %></span></h5>
                   <p class="card-text descricao-produto"><%= produto.descricao_produto %></p>
                 </div>
@@ -265,25 +263,25 @@
           <label>
             Nome:
           </label>
-          <input type="text" id="" class="form-control div_nome_cliente" onblur="validaNome(this)">
+          <input type="text" id="" class="form-control div_nome_cliente" required>
         </div>
         <div class="form-group col-sm-4">
           <label>
             CPF:
           </label>
-          <input type="text" id="" class="form-control div_cpf_cliente" onblur="validaCPF()">
+          <input type="text" id="" class="form-control div_cpf_cliente" required>
         </div>
         <div class="form-group col-sm-4">
           <label>
             Telefone:
           </label>
-          <input type="text" id="" class="form-control div_telefone_cliente" onblur="validaTelefone(this)">
+          <input type="text" id="" class="form-control div_telefone_cliente" required>
         </div>
         <div class="form-group col-sm-4">
             <label>
               Email:
             </label>
-            <input type="text" id="" class="form-control div_email_cliente">
+            <input type="email" id="" class="form-control div_email_cliente" required>
           </div>
       </div>
     </div>
@@ -293,13 +291,13 @@
           <label>
             Endereço:
           </label>
-          <input type="text" id="" class="form-control div_endereco_cliente">
+          <input type="text" id="" class="form-control div_endereco_cliente" required>
         </div>
         <div class="form-group col-sm-2">
           <label>
             Número:
           </label>
-          <input type="text" id="" class="form-control div_numero_casa_cliente">
+          <input type="text" id="" class="form-control div_numero_casa_cliente" required>
         </div>
         <div class="form-group col-sm-4">
           <label>
@@ -311,7 +309,7 @@
           <label>
             Cidade:
           </label>
-          <input type="text" id="" class="form-control div_cidade_cliente">
+          <input type="text" id="" class="form-control div_cidade_cliente" required>
         </div>
       </div>
     </div>
@@ -319,9 +317,9 @@
 </div>
 <!-- fim dos dados do cliente --> 
 
-<!-- Contato via WhatsApp -->
+<!-- Contato via WhatsApp 
 
-<img src="/imagens/whatsapp-icone-60x60.png" id="icone_whatsapp" class="fake_de_link">
+<img src="/imagens/whatsapp-icone-60x60.png" id="icone_whatsapp" class="fake_de_link">-->
 
 <!-- Resposta de venda -->
 <div id="snackbar"></div>

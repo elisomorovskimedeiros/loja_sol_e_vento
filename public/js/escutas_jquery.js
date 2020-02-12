@@ -13,7 +13,6 @@ $(document).ready(function(){
         produto.preco_produto = $(e.currentTarget).find($(".preco-produto")).html();
         produto.descricao_produto = $(e.currentTarget).find($(".descricao-produto")).html();
         produto.id_produto = $(e.currentTarget).find($(".id-produto")).html();
-        console.log(produto);
         if($(e.currentTarget).parent().attr("id") == "mostruario"){ //true caso seja aberto em detalhes de produto no mostruario
             $("#nome_produto_mostruario").html(produto.nome_produto);
             $("#imagem_produto_mostruario").attr("src", produto.foto_produto);
@@ -88,10 +87,6 @@ $(document).ready(function(){
     $("#btn_enviar_carrinho").click(function(e){
         let produto_em_compra = $.extend(true, {}, produto);
         produto_em_compra.quantidade_produto = $("#quantidade_produto").val();
-        console.log("quantidade produtos:");
-        console.log($("#quantidade_produto").val());
-        console.log("produtos:");
-        console.log(produtos);
         //laço que pesquisa se o produto já existe no carrinho
         let ja_existe_no_carrinho = false;
         produtos.forEach(produto_do_carrinho => {
@@ -109,6 +104,9 @@ $(document).ready(function(){
     });
 
     $("#carrinho_de_compras").on("show.bs.modal", function(){
+        setTimeout(function() {
+            $("body").addClass("modal-open");
+        }, 500);  
         if(produtos.length == 0){
             console.log("Produtos dentro do if do show modal");
             console.log(produtos);
@@ -126,6 +124,7 @@ $(document).ready(function(){
 
     $("#carrinho_de_compras").on("hide.bs.modal", function(){
         $("#conteudo_carrinho").html("");
+        $("#dados_cliente").html("");
         $("#btn_finalizar_compra").css("display", "initial");
         $("#btn_enviar_compra").css("display", "none");
     });
@@ -178,17 +177,31 @@ $(document).ready(function(){
         bloco_dados_cliente.find(".div_nome_cliente").attr("id", "nome_cliente");
         bloco_dados_cliente.find(".div_telefone_cliente").attr("id", "telefone_cliente");
         bloco_dados_cliente.find(".div_endereco_cliente").attr("id", "endereco_cliente");
+        bloco_dados_cliente.find(".div_cpf_cliente").attr("id", "cpf_cliente");
+        bloco_dados_cliente.find(".div_email_cliente").attr("id", "email_cliente");
+        bloco_dados_cliente.find(".div_numero_casa_cliente").attr("id", "numero_casa_cliente");
+        bloco_dados_cliente.find(".div_bairro_cliente").attr("id", "bairro_cliente");
+        bloco_dados_cliente.find(".div_cidade_cliente").attr("id", "cidade_cliente");
+
         $("#btn_finalizar_compra").css("display", "none");
         $("#btn_enviar_compra").css("display", "initial");
     });
 
+    //envio da compra para o servidor
     $("#btn_enviar_compra").click(function(){
-        
+        let cliente = {
+            nome: $("#nome_cliente").val(),
+            cpf: $("#cpf_cliente").val(),
+            telefone: $("#telefone_cliente").val(),
+            email: $("#email_cliente").val(),
+            endereco: $("#endereco_cliente").val(),
+            numero_casa: $("#numero_casa_cliente").val(),
+            bairro: $("#bairro_cliente").val(),
+            cidade: $("#cidade_cliente").val(),
+        }
         venda = {
             'produtos': produtos,
-            'nome_cliente': $("#nome_cliente").val(),
-            'telefone_cliente': $("#telefone_cliente").val(),
-            'endereco_cliente': $("#endereco_cliente").val()
+            'cliente': cliente
         }
         produtos = [];
         $("#btn_enviar_compra").css("display", "none");

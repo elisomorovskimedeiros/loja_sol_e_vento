@@ -40,13 +40,18 @@ class Email{
         let email = this;
         let mensagem = "Nova venda pelo site!\n" +
                         "Venda para: " +
-                        dadosCliente.nome_cliente +", "+
-                        "telefone: " + dadosCliente.telefone_cliente +", "+
-                        "endereço: " + dadosCliente.endereco_cliente +"\n "+
-                        "Produtos: ";
+                        dadosCliente.nome +", "+
+                        "telefone: " + dadosCliente.telefone +",\n"+
+                        "CPF: " + dadosCliente.cpf +",\n" +
+                        "email: " + dadosCliente.email +",\n" +
+                        "endereço: " + dadosCliente.endereco +
+                        ", " + dadosCliente.numero_casa + ",\n"+
+                        "bairro: " + dadosCliente.bairro + ",\n"+
+                        "cidade: " + dadosCliente.cidade + ".\n"
+                        "Produtos: \n";
         produtos.forEach(function(produto){
             mensagem += produto.nome_produto +
-                        "quantidade: " + produto.quantidade_produto + "\n";
+                        " - quantidade: " + produto.quantidade_produto + "\n";
         });
 
         console.log(mensagem);
