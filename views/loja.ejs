@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Sol e Vento - Capão da Canoa - RS. Artigos de Iluminação & Energia Solar Fotovoltaíca">
   <meta name="author" content="Eli Somorovski Medeiros">
+  <!--icone da aba-->
+  <link rel="shortcut icon" href="imagens/Logotipo.ico" >
 
   <title>Sol e Vento</title>
 
@@ -15,7 +17,8 @@
 
   <!-- Custom styles for this template -->
   <link href="css/shop-homepage.css" rel="stylesheet">
-
+  <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+  
 
 </head>
 
@@ -43,9 +46,11 @@
           <li class="nav-item active">
             <a class="nav-link" href="/contato">Contato</a>
           </li>
+          <!--
           <li class="nav-item active">
             <a class="nav-link" href="#">Login</a>
           </li>
+        -->
           <li class="nav-item active nav-link fake_de_link" id="link_carrinho">
             Carrinho
           </li>
@@ -64,6 +69,14 @@
           <h1>Sol e Vento</h1>
           <h5>Capão da Canoa - RS</h5>
         </div>
+        <a href="https://www.facebook.com/soleventocapao" target="_blank">
+          <i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i>
+        </a>
+        &nbsp;&nbsp;
+        <a href="https://api.whatsapp.com/send?phone=5551993101122&text= Contato via site!" target="_blank" style="color: green">
+          <i class="fa fa-whatsapp fa-2x" aria-hidden="true"></i>
+        </a>
+        
         <!--
         <div class="list-group">
           <a href="#" class="list-group-item">Iluminação</a>
@@ -209,7 +222,8 @@
             <div class="modal-footer d-flex mb-3">
                 <div class="mr-auto p-2">
                   <h4>
-                      <span>Total da compra: R$</span>
+                      <span id="numero_de_produtos"></span>
+                      <span>total: R$</span>
                       <span id="campo_valor_total"></span>
                   </h4>                                   
                 </div>
@@ -229,28 +243,30 @@
 
 
 <!-- bloco de produto no carrinho-->
-<div class="card mt-4 invisible float" id="bloco_produto_carrinho">
-  <div class="row d-flex align-items-center">
-    <img class="col-md-2 imagem_produto_carrinho" src="" width="50px" alt="">
-    <h4 class="col-md-2 nome_produto_carrinho" >Product Name</h4>
-    <h4 class="col-md-2">R$<span class="preco_produto_carrinho"></span></h4>
-    <div class="col-md-2 form-group">
-      <label>Qtd:</label>
-      <input type="number" class="form-control quantidade_produto_carrinho" style="width: 70px;" min="1" max="10">
-    </div>                      
-    <div class="col-md-2">
-        <h5>Total do item: R$<span class="total_do_item"></span></h5>
-    </div>
-    <div class="col-md-2 text-danger fake_de_link lixeira">
-      <img src="imagens/lixeira_vermelha_40x80.png" style="padding-left: 9px;">
-      Remover
+<div style="display: none">
+  <div class="card mt-4 invisible float" id="bloco_produto_carrinho" >
+    <div class="row d-flex align-items-center">
+      <img class="col-md-2 imagem_produto_carrinho" src="" width="50px" alt="">
+      <h4 class="col-md-2 nome_produto_carrinho" >Product Name</h4>
+      <h4 class="col-md-2">R$<span class="preco_produto_carrinho"></span></h4>
+      <div class="col-md-2 form-group">
+        <label>Qtd:</label>
+        <input type="number" class="form-control quantidade_produto_carrinho" style="width: 70px;" min="1" max="10">
+      </div>                      
+      <div class="col-md-2">
+          <h5>Total do item: R$<span class="total_do_item"></span></h5>
+      </div>
+      <div class="col-md-2 text-danger fake_de_link lixeira">
+        <img src="imagens/lixeira_vermelha_40x80.png" style="padding-left: 9px;">
+        Remover
+      </div>
     </div>
   </div>
 </div>
 <!-- fim do bloco de produto no carrinho-->
 
 <!-- dados do cliente -->             
-<div class="card mt-4 invisible float">
+<div class="float" style="display: none">
   <div class="container bloco_dados_cliente">
     <div>
       <h4>
@@ -258,63 +274,72 @@
       </h4>
     </div>
     <div class="card card-body">
-      <div class="row">
-        <div class="form-group col-sm-8">
-          <label>
+      <div class="form-row">
+        <div class="form-group col-sm-8" id="container_nome_cliente">
+          <label class="form-control-label">
             Nome:
           </label>
-          <input type="text" id="" class="form-control div_nome_cliente" required>
+          <input type="text" id="" class="form-control div_nome_cliente" onblur="teste_de_nome(this)">
+          <div class="invalid-feedback"></div>
         </div>
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-4" id="container_cpf_cliente">
           <label>
             CPF:
           </label>
-          <input type="text" id="" class="form-control div_cpf_cliente" required>
+          <input type="text" id="" class="form-control div_cpf_cliente" required onblur="teste_cpf(this)">
+          <div class="invalid-feedback"></div>
         </div>
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-4" id="container_telefone_cliente">
           <label>
             Telefone:
           </label>
-          <input type="text" id="" class="form-control div_telefone_cliente" required>
+          <input type="text" id="" class="form-control div_telefone_cliente" required onblur="teste_telefone(this)">
+          <div class="invalid-feedback"></div>
         </div>
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-4" id="container_email_cliente">
             <label>
               Email:
             </label>
-            <input type="email" id="" class="form-control div_email_cliente" required>
+            <input type="text" id="" class="form-control div_email_cliente" required onblur="teste_email(this)">
+            <div class="invalid-feedback"></div>
           </div>
       </div>
     </div>
     <div class="card card-body" style="margin-top: 10px;">
-      <div class="row">
-        <div class="form-group col-sm-7">
+      <div class="form-row">
+        <div class="form-group col-sm-7" id="container_endereco_cliente">
           <label>
             Endereço:
           </label>
-          <input type="text" id="" class="form-control div_endereco_cliente" required>
+          <input type="text" id="" placeholder="Nome da sua rua" class="form-control div_endereco_cliente" required onblur="teste_endereco(this)">
+          <div class="invalid-feedback"></div>
         </div>
-        <div class="form-group col-sm-2">
+        <div class="form-group col-sm-2" id="container_numero_cliente">
           <label>
             Número:
           </label>
-          <input type="text" id="" class="form-control div_numero_casa_cliente" required>
+          <input type="text" id="" class="form-control div_numero_casa_cliente" required onblur="teste_numero_casa(this)">
+          <div class="invalid-feedback"></div>
         </div>
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-4" id="container_bairro_cliente">
           <label>
             Bairro:
           </label>
-          <input type="text" id="" class="form-control div_bairro_cliente">
+          <input type="text" id="" class="form-control div_bairro_cliente" onblur="teste_bairro(this)">
+          <div class="invalid-feedback"></div>
         </div>
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-4" id="container_cidade_cliente">
           <label>
             Cidade:
           </label>
-          <input type="text" id="" class="form-control div_cidade_cliente" required>
+          <input type="text" id="" class="form-control div_cidade_cliente" required onblur="teste_cidade(this)">
+          <div class="invalid-feedback"></div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 <!-- fim dos dados do cliente --> 
 
 <!-- Contato via WhatsApp 

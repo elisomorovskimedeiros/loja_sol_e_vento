@@ -248,6 +248,7 @@ function alerta_de_exclusao(){
 }
 
 function preencherConteudoCarrinho(){
+  let numero_de_produtos = 0;
   $("#conteudo_carrinho").html("");
   produtos.forEach(function(produto_em_compra, indice){
     let div_criada = ($("#bloco_produto_carrinho").clone()
@@ -267,38 +268,178 @@ function preencherConteudoCarrinho(){
 
 function calculo_do_total_da_compra(){
   let totais_dos_itens = $("#conteudo_carrinho").find(".total_do_item");
+  let numero_de_itens = $("#conteudo_carrinho").find(".quantidade_produto_carrinho");
   let total_da_compra = 0;
+  let  numero_total_de_itens = 0;
   for(let indice = 0; indice < totais_dos_itens.length; indice++){
     let valor_total_do_item = Number($(totais_dos_itens[indice]).html());
     total_da_compra += valor_total_do_item;
   }
+  for(let indice = 0; indice < numero_de_itens.length; indice++){
+    let numero = Number($(numero_de_itens[indice]).val());
+    numero_total_de_itens += numero;
+  }
   $("#campo_valor_total").html(total_da_compra);
+  if(produtos.length > 1){
+    numero_total_de_itens += " produtos, ";
+  }else{
+    numero_total_de_itens += " produto, ";
+  }
+  $("#numero_de_produtos").html(numero_total_de_itens);
 }
 
-//validação do campo nome_cliente
-function validaNome(campo){
-  let nome = campo.value;
-  let temEspaco = false;
-  //verificação de espaço no campo nome_cliente
-  if(campo.id == "nome_"){ 
-      for(let i = 0; i < nome.length; i++){
-          if(nome[i] == " "){
-              temEspaco = true;
-          }
-      }        
+
+//VALIDAÇÕES DO FORMULARIO COM INFORMAÇÕES DO CLIENTE
+
+function inserir_feedback_no_campo(validacao){
+  if(!validacao.status){
+    $(validacao.campo).removeClass("is-valid");
+    $(validacao.campo).addClass("is-invalid");
+    $(validacao.campo).next().html(validacao.mensagem);
+    window.location.href = "#"+$(validacao.campo).parent().attr("id");
   }else{
-      temEspaco = true;
-  }
-  
-  if(temEspaco && nome.length > 2){
-      if(campo.classList.contains("is-invalid")){
-          campo.classList.remove("is-invalid");
-      }
-      campo.classList.add("is-valid");
-  }else{
-      if(campo.classList.contains("is-valid")){
-          campo.classList.remove("is-valid");
-      }
-      campo.classList.add("is-invalid");
+    $(validacao.campo).removeClass("is-invalid");
+    $(validacao.campo).addClass("is-valid");
   }
 }
+
+function teste_de_nome(campo){
+  let nome = $(campo).val();
+  let temEspaco = false;
+  let validacao = {};
+  for(let indice = 0; indice < nome.length; indice++){
+    if(nome[indice] === ' '){
+      temEspaco = true;
+    }
+  }
+  if(!temEspaco){
+    validacao = {status : false,
+      mensagem : "Seu nome deve estar completo com nome e sobrenome",
+      campo : campo
+    };
+  }else if(nome.length < 3){
+    validacao = {status : false,
+      mensagem : "Seu nome deve estar completo e não pode ter menos de 3 caracteres",
+      campo : campo
+    };
+  }else{
+    validacao = {status : true,
+      campo : campo
+    };
+  }
+  inserir_feedback_no_campo(validacao);
+}
+
+function teste_cpf(campo){
+  let validacao = {};
+  let cpf = '';
+  let cpf_informado = $(campo).val();
+  for(let i = 0; i < cpf_informado.length; i++){
+    if(cpf_informado.charCodeAt(i) >= 48 && cpf_informado.charCodeAt(i) <= 57){
+      cpf += cpf_informado[i];
+    }
+  }
+  
+  if(cpf.length != 11){
+    validacao = {status : false,
+      mensagem : "O CPF possui 11 números!",
+      campo : campo
+    };
+  }else{
+    validacao = {status : true,
+    campo : campo
+    };
+  }
+  inserir_feedback_no_campo(validacao);
+}
+
+function teste_telefone(campo){
+  let validacao = {};
+  if($(campo).val() != ''){
+    validacao = {status : true,
+      campo : campo
+    };
+  }else{
+    validacao = {status : false,
+      mensagem : "Insira um telefone",
+      campo : campo
+    };
+  }
+  inserir_feedback_no_campo(validacao);
+}
+
+function teste_email(campo){
+  let validacao = {};
+  if($(campo).val() != ''){
+    validacao = {status : true,
+      campo : campo
+    };
+  }else{
+    validacao = {status : false,
+      mensagem : "Insira um email válido",
+      campo : campo
+    };
+  }
+  inserir_feedback_no_campo(validacao);
+}
+
+function teste_endereco(campo){
+  let validacao = {};
+  if($(campo).val() != ''){
+    validacao = {status : true,
+      campo : campo
+    };
+  }else{
+    validacao = {status : false,
+      mensagem : "Insira o nome de sua rua",
+      campo : campo
+    };
+  }
+  inserir_feedback_no_campo(validacao);
+}
+
+function teste_numero_casa(campo){
+  let validacao = {};
+  if($(campo).val() != ''){
+    validacao = {status : true,
+      campo : campo
+    };
+  }else{
+    validacao = {status : false,
+      mensagem : "Insira o número de sua casa",
+      campo : campo
+    };
+  }
+  inserir_feedback_no_campo(validacao);
+}
+
+function teste_bairro(campo){
+  let validacao = {};
+  if($(campo).val() != ''){
+    validacao = {status : true,
+      campo : campo
+    };
+  }else{
+    validacao = {status : false,
+      mensagem : "Facilite a minha vida e informe o seu bairro",
+      campo : campo
+    };
+  }
+  inserir_feedback_no_campo(validacao);
+}
+
+function teste_cidade(campo){
+  let validacao = {};
+  if($(campo).val() != ''){
+    validacao = {status : true,
+      campo : campo
+    };
+  }else{
+    validacao = {status : false,
+      mensagem : "Informe sua cidade",
+      campo : campo
+    };
+  }
+  inserir_feedback_no_campo(validacao);
+}
+

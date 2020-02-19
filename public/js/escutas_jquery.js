@@ -137,6 +137,8 @@ $(document).ready(function(){
             $("#conteudo_carrinho").html("<h1>Carrinho de compras vazio</h1>");
             $("#dados_cliente").hide();
             $("#btn_finalizar_compra").hide();
+            $("#campo_valor_total").html("0");
+            $("#numero_de_produtos").html("");
         }else{
             preencherConteudoCarrinho();
         }
@@ -189,33 +191,46 @@ $(document).ready(function(){
 
     //envio da compra para o servidor
     $("#btn_enviar_compra").click(function(){
-        let cliente = {
-            nome: $("#nome_cliente").val(),
-            cpf: $("#cpf_cliente").val(),
-            telefone: $("#telefone_cliente").val(),
-            email: $("#email_cliente").val(),
-            endereco: $("#endereco_cliente").val(),
-            numero_casa: $("#numero_casa_cliente").val(),
-            bairro: $("#bairro_cliente").val(),
-            cidade: $("#cidade_cliente").val(),
-        }
-        venda = {
-            'produtos': produtos,
-            'cliente': cliente,
-            'valor_total': $("#campo_valor_total").html()
-        }
-        
-        produtos = [];
-        $("#btn_enviar_compra").css("display", "none");
-        
-        $("#carrinho_de_compras").modal("hide");
-        
-        let url = "/venda";
-        $.post( url, 
-            venda,
-            function(resposta, status){
-                emitirAviso(resposta, "snackbar", 10000);
+        teste_de_nome($("#nome_cliente"));
+        teste_cpf($("#cpf_cliente"));
+        teste_telefone($("#telefone_cliente"));
+        teste_email($("#email_cliente"));
+        teste_endereco($("#endereco_cliente"));
+        teste_numero_casa($("#numero_casa_cliente"));
+        teste_bairro($("#bairro_cliente"));
+        teste_cidade($("#cidade_cliente"));
+        console.log($("#dados_cliente").find(".is-invalid"));
+        if($("#dados_cliente").find(".is-invalid").length > 0){
+            console.log("não deu");
+        }else{
+            let cliente = {
+                nome: $("#nome_cliente").val(),
+                cpf: $("#cpf_cliente").val(),
+                telefone: $("#telefone_cliente").val(),
+                email: $("#email_cliente").val(),
+                endereco: $("#endereco_cliente").val(),
+                numero_casa: $("#numero_casa_cliente").val(),
+                bairro: $("#bairro_cliente").val(),
+                cidade: $("#cidade_cliente").val(),
             }
-        );
+            venda = {
+                'produtos': produtos,
+                'cliente': cliente,
+                'valor_total': $("#campo_valor_total").html()
+            }
+            
+            produtos = [];
+            $("#btn_enviar_compra").css("display", "none");
+            
+            $("#carrinho_de_compras").modal("hide");
+            
+            let url = "/venda";
+            $.post( url, 
+                venda,
+                function(resposta, status){
+                    emitirAviso(resposta, "snackbar", 10000);
+                }
+            );
+        }
     });
 });
