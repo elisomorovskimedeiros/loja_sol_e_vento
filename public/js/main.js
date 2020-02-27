@@ -58,7 +58,6 @@ function seleciona(botao){
   if(statusFormContato.email == false){
     botao.style = "box-shadow: 4px 3px 0 rgba(0, 0, 0, .3),0 -2px -7px rgba(0, 0, 0, 0.2)";
     statusFormContato.email == true;
-    console.log(statusFormContato.email);
   }else{
     //botao.setAttribute(style="box-shadow: 4px 3px 0 rgba(0, 0, 0, .3),0 2px 7px rgba(0, 0, 0, 0.2)", false);
     statusFormContato.email == false;

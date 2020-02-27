@@ -60,12 +60,14 @@ class Produto{
     update(produto){
         let sql = "UPDATE produto SET " +
                 "nome_produto = \'" + produto.nome_produto + "\'," +
-                "pn_produto = \'" + produto.pn_produto + "\', " +
-                "imagem_produto = \'" + produto.imagem_produto + "\'," +
-                "preco_produto = " + produto.preco_produto + "," +
+                "pn_produto = \'" + produto.pn_produto + "\', " +                
+                "preco_produto = " + produto.preco_produto + ", " +
                 "qtd_produto = " + produto.qtd_produto + ", " +
-                "descricao_produto = \'"+ produto.descricao_produto +
-            "\' WHERE id_produto  = ?";
+                "descricao_produto = \'"+ produto.descricao_produto;
+        if(produto.imagem_produto != ''){
+            sql += "\', imagem_produto = \'" + produto.imagem_produto;
+        }
+            sql += "\' WHERE id_produto  = ?";
         return this.query(sql, produto.id_produto);
     }
 

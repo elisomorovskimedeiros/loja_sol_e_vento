@@ -3,6 +3,11 @@ $(document).ready(function(){
     if($("#resposta_insercao_produto").length && $("#resposta_insercao_produto").val() != ''){
         emitirAviso($("#resposta_insercao_produto").val(), "snackbar", 3000);
     }
+    if($("#resposta_email").length && $("#resposta_email").val() != ''){
+        emitirAviso($("#resposta_email").val(), "snackbar", 3000);
+        setTimeout(function(){window.location = "/"; }, 3100);
+    }
+    
     //abre o modal de edição do produto
     $(".container-produto").click(function(e){
         

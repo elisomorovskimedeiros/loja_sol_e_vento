@@ -3,26 +3,12 @@
             /*font-family: "Lucida Sans", sans-serif;*/
             font-family: "Proxima Nova", "-apple-system", "Helvetica Neue", Helvetica, "Roboto", Arial, sans-serif;
         }
-        body{
-            background-color: rgb(235, 235, 235);
-            padding-top: 6%;
-        }
-       
+              
         *{
             box-sizing: border-box;
         }
 
-        .row{
-            margin-right: 0px;
-            margin-left: 0px;
-        }
-
-        .row::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-
+   
         a:link{
             text-decoration: none;
         }
@@ -61,48 +47,7 @@
         }
         
         /*CONFIGURAÇÕES DE CLASSES*/
-    
-        .links-titulo{
-            
-            text-decoration: none;
-            text-align: center; 
-        }        
-
-        .cabecalho a {
-            text-decoration: none;
-            color:white;
-            /*-webkit-text-stroke-width: 1px; /* largura da borda */
-            /*-webkit-text-stroke-color: #000; /* cor da borda */
-        }
-        .cabecalho{
-            background-color: #fba75d;
-            border: 1px solid #e7e7e7;
-        }
-
-        
-        .botao_principal{
-            list-style-type: none;
-            background-color: rgb(251, 167, 93);
-            border: 1px solid #e7e7e7;
-            height: 70px;
-            margin-top: 12%;
-            text-align: center;
-            padding-top: 7px;
-            border-radius: 10px;
-            box-shadow: 10px 10px 10px #888;
-            color:white;
-            font-size: 20px;
-        }
-       
-        .rodape{
-            margin: 15px;
-            text-align: center;
-        }
-        
-        .img{
-            margin-right: 100px;
-            margin-top: 15px;
-        }
+  
 
         .segunda_parte{
             margin-top: 200px;
@@ -128,38 +73,13 @@
         .campo_formulario{
             margin-top: 15px;
         }
-        .container-loja{
-            margin-top: 30px;
-            margin-left: 5vw;
-            margin-right: 2vw;            
-            text-align: center;
-            color: #666;
-            font-size: 14px; 
-        }       
-        .container-produto{
-            border-radius: 10px;
-            background-color: white;
-            box-shadow: 1px 1px 1px #666;
-            padding: 10px;
-            margin: 10px;
-        }
-        .container-produto:hover{
-            box-shadow: 5px 5px 5px #666;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .container-produto h4{
-            margin-bottom: 0px !important; 
-        }
+   
 
+   
         .clear-both{
             clear: both;
         }
 
-        .foto-produto{
-            max-height: 144px;
-        }
-        
         input_mostruario.textarea:focus, input_mostruario.input:focus, input_mostruario.select:focus {
             box-shadow: 0 0 0 0;
             border: 0 none;

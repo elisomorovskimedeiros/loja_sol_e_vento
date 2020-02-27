@@ -1,72 +1,67 @@
 <% include partials/cabecalho %>
-<div style="width:100%">
+<div class="container espacar_do_cabecalho">
            
-        <div id = contato class="contato centralizar-div">
-                <div id="whats">
-                        <h2>Envie um WhatsApp</h2>
-                        <div id="container-whats" class="row espaco-borda-esquerda">                       
-                            <button class="col-12 right campo_formulario botao" id="botao_whats" onmousedown="descerBotao(this)" onmouseup="erguerBotao(this)">
-                                <img src="/imagens/whats.png" width="35px" class="icone"><br>Enviar<br>WhatsApp:
-                            </button>                                
-                        </div>
-                    </div>     
-            <h2 class="espaco-borda-esquerda">Peça seu orçamento via e-mail</h2>
+        <div>
+            <div id="whats">
+                <div id="container-whats" class="row">
+                    <h2 class="col-md-12">
+                        Envie um WhatsApp
+                    </h2>                       
+                    <button class="col-5 btn btn-outline-success" id="botao_whats" onmousedown="descerBotao(this)" onmouseup="erguerBotao(this)">
+                        <img src="/imagens/whats.png" width="35px" class="icone"><br>Enviar<br>WhatsApp:
+                    </button>                                
+                </div>
+            </div>     
+            <h2 class="espaco-borda-esquerda espacar_de_cima">Peça seu orçamento via e-mail</h2>
             <form method="post" action="/mandarMensagem" id="formContato" name="formContato">        
                 <div class="row espaco-borda-esquerda">
-                    <div id="resposta_email" style="display: none">
-                        <%= resposta.resposta %>
-                    </div>
-                    <div class="col-3 left campo_formulario espa">
-                        Informe seu nome:
-                    </div>                    
-                    <div class="col-9 right campo_formulario">
-                        <input type="text" name="nome" placeholder="Seu nome" onblur="verificarNome(this.value)" onkeyup="verificarNome(this.value)">
+                    <div class="col-5 form-group">
+                        <label>
+                            Informe seu nome:
+                        </label>  
+                        <input type="text" name="nome" class="form-control" placeholder="Seu nome" onblur="verificarNome(this.value)" onkeyup="verificarNome(this.value)">
                         <span id="avisoNome"></span><br>
+                    </div>                    
+                    <div class="col-7 form-group">
+                        <label>
+                            Informe sua cidade:
+                        </label>
+                        <input type="text" class="form-control" name="cidade" placeholder="Ex.: Capão da Canoa">
                     </div>
-                    <div class="col-3 left campo_formulario espa" style="padding-top: 5px">
-                        Informe sua cidade:
-                    </div>
-                    <div class="col-9 right campo_formulario">
-                        <input type="text" name="cidade" placeholder="Ex.: Capão da Canoa">
+                    <div id="container-email" class="col-md-5" onclick="seleciona(this)">
+                        <div>
+                            <label>
+                                <img src="/imagens/icon-mail.png" width="30px" class="icone"> &nbsp;   E-mail:
+                            </label>
+                            <input type="email" id="email" class="col-md-12 form-control" name="email" placeholder="exemplo@exemplo.com.br" onblur="verificarEmail(this.value)" onkeyup="desabilitaDiv(this, 'container-whats', 'whats'), verificarEmail(this.value)">
+                            <span id="avisoEmail"></span><br>
+                        </div>
                     </div>                  
                 </div>
-                <div id="container-email" class="row espaco-borda-esquerda" onclick="seleciona(this)">                                
-                    <div class="col-3 left campo_formulario">                            
-                        <img src="/imagens/icon-mail.png" width="30px" class="icone"> &nbsp;   E-mail:
-                    </div>                 
-                    <div class="col-9 right campo_formulario">
-                        <span><input type="text" id="email" name="email" placeholder="exemplo@exemplo.com.br" onblur="verificarEmail(this.value)" onkeyup="desabilitaDiv(this, 'container-whats', 'whats'), verificarEmail(this.value)"></span>
-                        <span id="avisoEmail"></span><br>
-                    </div>            
-                </div>
-                            
-                <div class="row mensagem espaco-borda-esquerda">                   
-                    <div class="campo_formulario">
+                
+  
+                <div class="form-group">                   
+                    <label>
                         Mensagem: 
-                    </div>
-                    <div class="campo_formulario col-9 left">
-                            <textarea cols="50" rows="5" name="mensagem" id="mensagem" onblur="habilitaEnvio(this, 'botao_email')" onkeyup="habilitaEnvio(this, 'botao_email')" placeholder="Escreva seu email"></textarea>
-                    </div>
-                    <button class="col-3 right campo_formulario botao transparencia" id="botao_email" onmousedown="descerBotao(this)" disabled onmouseup="erguerBotao(this)">
-                            <img src="/imagens/icon-mail.png" width="35px" class="icone"><br>Enviar<br>Email:
-                    </button>
-                    
-
-                               
+                    </label>
+                    <div class="form-group">
+                        <textarea cols="50" class="form-control" rows="5" name="mensagem" id="mensagem" onblur="habilitaEnvio(this, 'botao_email')" onkeyup="habilitaEnvio(this, 'botao_email')" placeholder="Escreva seu email"></textarea>
+                        
+                        <button disabled class="btn btn-outline-success botao form-btn-control espacar_de_cima" id="botao_email">
+                            <img src="/imagens/icon-mail.png" width="35px" class="icone"><br>Enviar Email:
+                        </button>
+                    </div>     
                 </div>
             </form>
                          
         </div>
-        <!--RETORNO DO SERVIDOR SOBRE O ENVIO DO EMAIL-->
-        <script>
-                let divStatus = document.getElementById("resposta_email").innerHTML;
-                console.log(divStatus);
-                if(divStatus.indexOf("true") != -1){
-                    document.getElementById("contato").innerHTML = "<div><div style='width: 200px;' class='centralizar-div'><img src='/imagens/certo.png'><br>Mensagem Enviada<a href='/'><div class='botao' style='margin-top: 15%'>Voltar</div></a></div>";
-                }else if(divStatus.indexOf("false") != -1){
-                    document.getElementById("contato").innerHTML = "<div><div style='width: 200px;' class='centralizar-div'><img src='/imagens/erro.png'><br>Ocorreu um erro no envio<a href='/'><div class='botao' style='margin-top: 15%'>Voltar</div></a></div>";
-                }
-        </script>
+       
+
+        <% if (typeof resposta != 'undefined'){ %>
+            <%console.log(resposta)%>
+            <input type="text" id="resposta_email" style="display: none;" value="<%= resposta.mensagem %>">
+        <% } %> 
+        <div id="snackbar" class=""></div>
         
        
 </div>

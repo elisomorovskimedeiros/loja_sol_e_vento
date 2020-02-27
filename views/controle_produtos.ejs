@@ -1,6 +1,6 @@
 <% include partials/cabecalho %>
-<div class="container">
-    <btn class="btn btn-success">
+<div class="container espacar_de_cima" >
+    <btn class="btn btn-success  espacar_de_cima">
         <a href="/produtos/new">
         Inserir novo produto
     </a>
@@ -8,7 +8,7 @@
   
     <div class="row container container-loja">
         <% produtos.forEach(function(produto, indice){ %>
-            <div class="col-md-2 container-produto" data-toggle="modal" data-target="#janela_de_edicao_de_produto">
+            <div class="col-lg-4 container-produto-editar fake_de_link card card-body" data-toggle="modal" data-target="#janela_de_edicao_de_produto">
                     <div>
                         <img class="foto-produto" src="<%= produto.imagem_produto%>" width="150px">
                     </div>
@@ -30,7 +30,6 @@
                     <div>
                         <h3><span>R$</span><span class="preco-produto"><%= produto.preco_produto %></span></h3>
                     </div>
-           
             </div>
         <% }); %>
     </div>
@@ -76,7 +75,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Quantidade em Estoque</label>
-                                <input type="text" class="form-control" name="qtd_produto" id="qtd_produto_edicao">
+                                <input type="number" class="form-control" name="qtd_produto" id="qtd_produto_edicao">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Descrição do Produto</label>
@@ -116,6 +115,6 @@
 <% } %>    
 <div id="snackbar"></div>
 
-<% include partials/rodape %>
+
     <!-- fechamento do modal de edição do produto -->
 <% include partials/rodape %> 

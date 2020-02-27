@@ -4,7 +4,7 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
  */
 body {
-  padding-top: 56px;
+  padding-top: 70px;
 }
 
 #icone_whatsapp{
@@ -15,6 +15,11 @@ body {
 
 .fake_de_link:hover{
   cursor: pointer;
+}
+
+
+.container-produto-editar{
+  margin: 5px;
 }
 
 .foto-produto{
@@ -47,4 +52,24 @@ body {
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
+
+.espacar_de_cima{
+  margin-top: 10px;
+}
+
+.espacar_do_cabecalho{
+  margin-top: 70px;
+}
+
+#solicitacao-orcamento{
+  margin-top: 100px;
+  margin-bottom: 100px;
+  padding: 30px;
+  background-color: #06a961;        
+}
+#solicitacao-orcamento > a{
+  color: white; 
+}
+
+
 

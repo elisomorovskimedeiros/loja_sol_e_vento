@@ -28,8 +28,7 @@ var upload = multer({ storage: storage});//variável que manipula o post
 const app = express();
 const principal = new Principal();
 let produto = new Produto();
-let resposta = {
-    resposta: ""};
+let resposta = {};
 
 app.set("view engine", "ejs");
 
@@ -56,7 +55,7 @@ app.get("/", function(req, res){
             console.log(resposta.resultado);
         }else{
             let produtos = resposta.resultado;
-            res.render("loja", {produtos});
+            res.render("index", {produtos});
         }
     });
     
@@ -82,6 +81,7 @@ app.get("/quem_somos", function(req, res){
     res.render("sobre_nos.ejs");
 });
 app.get("/contato", function(req, res){
+    console.log(resposta);
     res.render("contato.ejs", {resposta});
 });
 app.get("/iluminacao", function(req, res){
@@ -105,7 +105,7 @@ app.get("/controle_produtos", function(req, res){
 
 //janela novo produto
 app.get("/produtos/new", function(req, res){
-    res.render("novo_produto.ejs");    
+    res.render("novo_produto");    
 });
 
 //recebimento do novo produto
@@ -214,21 +214,28 @@ app.post("/mandarMensagem", function(req, res){
                 console.log("Deu erro no envio");
                 console.log(error);
                 resposta.resposta = 'false';
+                resposta.mensagem = "Ocorreu um erro no envio";
                 res.render("contato.ejs",{resposta});
             }
             else{
                 resposta.resposta = 'true';
-                res.render("contato.ejs",{resposta});
-                console.log(info.response);                
+                resposta.mensagem = "Mensagem Enviada"
+                res.render("contato.ejs",{resposta});    
             }   
-            resposta.resposta = '';
+            resposta = {};
         });    
     }else if(mensagem.whats && mensagem.whats != ''){
         mensagem.whats = "55" + apenasNumeros(mensagem.whats);
         let alvoWhats = 'https://api.whatsapp.com/send?phone='+mensagem.whats+'&text='+mensagem.conteudo;
+        resposta.resposta = 'true';
+        resposta.mensagem = "Mensagem enviada";
+        res.render("contato.ejs",{resposta});
     }else{
-        console.log("email e whats vieram vazios");
-    }   
+        resposta.resposta = false;
+        resposta.mensagem = "email e whats vieram vazios";
+        res.render("contato.ejs",{resposta});
+    }
+    resposta.resposta = {};   
     //mensagem de envio ok: 250 2.0.0 OK  1551923466 o2sm2274213qtf.46 - gsmtp
 });
 
