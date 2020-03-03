@@ -228,14 +228,20 @@ $(document).ready(function(){
             $("#btn_enviar_compra").css("display", "none");
             
             $("#carrinho_de_compras").modal("hide");
+            $("body").css("cursor","progress");
             
             let url = "/venda";
             $.post( url, 
                 venda,
                 function(resposta, status){
                     emitirAviso(resposta, "snackbar", 10000);
-                }
+                    $("body").css("cursor","default");
+                },                                
             );
         }
+    });
+
+    $("#link_energia_solar").click(function(){
+        $("#navbarResponsive").toggle("hide");
     });
 });

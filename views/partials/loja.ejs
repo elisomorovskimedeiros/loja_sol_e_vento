@@ -67,7 +67,7 @@
 
         <div class="row container-loja" id="mostruario">
           <h3 align="justify" class="container">
-            Taxa de entrega dos produtos: Capão da Canoa: R$5,00, Xangri-lá: R$10,00, para demais locais favor consultar.
+            Entrega dos produtos: Capão da Canoa: R$5,00<br>Xangri-lá: R$10,00<br>Para demais locais favor consultar.
           </h3>
 
           <% produtos.forEach(function(produto){ %>
@@ -162,18 +162,18 @@
               <div id="dados_cliente"></div>
               <!-- dim dos dados do cliente -->
             </div>
-            <div class="modal-footer d-flex mb-3">
-                <div class="mr-auto p-2">
+            <div class="modal-footer d-flex justify-content-lg-around">
+                <div >
                   <h4>
                       <span id="numero_de_produtos"></span>
                       <span>total: R$</span>
                       <span id="campo_valor_total"></span>
                   </h4>                                   
                 </div>
-                <div class="p-2">
+                <div >
                   <button type="button" data-dismiss="modal" class="btn btn-light" id="fechar_modal_carrinho">Continuar Escolhendo</button>
                 </div>
-                <div class="p-2">
+                <div >
                   <button type="button" id="btn_finalizar_compra" class="btn btn-success">Finalizar Pedido</button>
                   <button type="button" id="btn_enviar_compra" class="btn btn-success" style="display: none">Enviar Compra</button>
                 </div>
@@ -188,18 +188,18 @@
 <!-- bloco de produto no carrinho-->
 <div style="display: none">
   <div class="card mt-4 invisible float" id="bloco_produto_carrinho" >
-    <div class="row d-flex align-items-center">
-      <img class="col-md-2 imagem_produto_carrinho" src="" width="50px" alt="">
-      <h4 class="col-md-2 nome_produto_carrinho" >Product Name</h4>
-      <h4 class="col-md-2">R$<span class="preco_produto_carrinho"></span></h4>
-      <div class="col-md-2 form-group">
+    <div class="row d-flex align-items-center container">
+      <img class="col-lg-2 imagem_produto_carrinho" src="" width="50px" alt="">
+      <h4 class="col-lg-2 nome_produto_carrinho" >Product Name</h4>
+      <h4 class="col-lg-2">R$<span class="preco_produto_carrinho"></span></h4>
+      <div class="col-lg-2 form-group">
         <label>Qtd:</label>
         <input type="number" class="form-control quantidade_produto_carrinho" style="width: 70px;" min="1" max="10">
       </div>                      
-      <div class="col-md-2">
+      <div class="col-lg-2">
           <h5>Total do item: R$<span class="total_do_item"></span></h5>
       </div>
-      <div class="col-md-2 text-danger fake_de_link lixeira">
+      <div class="col-lg-2 text-danger fake_de_link lixeira">
         <img src="imagens/lixeira_vermelha_40x80.png" style="padding-left: 9px;">
         Remover
       </div>

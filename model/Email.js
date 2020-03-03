@@ -56,9 +56,7 @@ class Email{
         });
         mensagem += "Valor da venda: R$" + valor_total;
 
-        console.log(mensagem);
 
-        
         email.mailOptions.to = 'contato.solevento@gmail.com';
         email.mailOptions.subject = "Nova venda pelo site!";
         email.mailOptions.text = mensagem;                          
@@ -69,6 +67,8 @@ class Email{
                 return false;
             }
         });
+        
+       return true;
         
     
     }
