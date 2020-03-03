@@ -229,7 +229,7 @@ $(document).ready(function(){
             
             $("#carrinho_de_compras").modal("hide");
             $("body").css("cursor","progress");
-            
+
             let url = "/venda";
             $.post( url, 
                 venda,
@@ -242,6 +242,6 @@ $(document).ready(function(){
     });
 
     $("#link_energia_solar").click(function(){
-        $("#navbarResponsive").toggle("hide");
+        $("#navbarResponsive").collapse("toggle");
     });
 });
