@@ -9,7 +9,7 @@ $(document).ready(function(){
     }
     
     //abre o modal de edição do produto
-    $(".container-produto").click(function(e){
+    $(".container-produto-editar").click(function(e){
         
         produto.nome_produto = $(e.currentTarget).find($(".nome-produto")).html();
         produto.foto_produto = $(e.currentTarget).find($(".foto-produto")).attr("src");
