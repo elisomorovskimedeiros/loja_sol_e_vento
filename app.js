@@ -3,9 +3,11 @@ const     express = require("express");
        bodyParser = require("body-parser"),
    methodOverride = require("method-override"),
        nodemailer = require('nodemailer'),
-        Produto = require("./model/Produto"),
-        multer  = require('multer'),//upload de arquivos
-        Email = require("./model/Email");//envio de emails
+          Produto = require("./model/Produto"),
+          multer  = require('multer'),//upload de arquivos
+            Email = require("./model/Email");//envio de emails
+            sharp = require("sharp");//redimensionador de imagens
+               fs = require("fs");
 
 
 //utilizado o midlleware Multer para captura do upload do arquivo contendo a foto dos produtos
@@ -14,12 +16,35 @@ const     express = require("express");
 //site que ajudou: https://code.tutsplus.com/tutorials/file-upload-with-multer-in-node--cms-32088
 var storage = multer.diskStorage({
     destination: function(req, file, cb){
-        cb(null, "public/imagens/");//local de gravação do arquivo
+        //criando o diretorio do arquivo
+        let dir = "public/imagens/produtos/"+req.body.nome_produto;
+        criar_diretorios_arquivos(dir);
+        cb(null, dir);//local de gravação do arquivo
     },
     filename: function (req, file,cb){
         cb(null, file.originalname);//nome do arquivo
-    }
+    }    
 });
+
+function criar_diretorios_arquivos(dir){
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, 0744);
+    }
+    if (!fs.existsSync(dir+"/miniaturas")) {
+        fs.mkdirSync(dir+"/miniaturas", 0744);
+    }
+}
+
+function miniaturizar_imagem(caminho_arquivo_origem, caminho_arquivo_destino, height){
+    //framework de redimensionamento de imagens
+    sharp(caminho_arquivo_origem).resize({ 
+        height: height})
+        .toFile(caminho_arquivo_destino)
+        .catch(function(err){
+            console.log("Ocorreu erro na criação da miniatura da foto");
+            console.log(err);
+    });
+}
 
 var upload = multer({ storage: storage});//variável que manipula o post
 
@@ -114,7 +139,10 @@ app.post("/produtos", upload.single('imagem_produto'), function(req, res){
     if(!file){//caso nenhuma foto tenha sido inserida
         console.log("não veio foto");
     }else{
-        imagem_produto = "imagens/"+ file.originalname;
+        imagem_produto = "imagens/"+ file.originalname;        
+        let caminho_arquivo_origem = "public/imagens/produtos/"+req.body.nome_produto+"/"+file.originalname;
+        let caminho_arquivo_destino = "public/imagens/produtos/"+req.body.nome_produto+"/miniaturas/miniatura"+file.originalname;
+        miniaturizar_imagem(caminho_arquivo_origem, caminho_arquivo_destino, 200);
     }
     produto.nome_produto = req.body.nome_produto;
     produto.pn_produto = req.body.pn_produto;
@@ -144,7 +172,10 @@ app.put("/produto/:id", upload.single('imagem_produto'), function(req, res){
     if(!file){//caso nenhuma foto tenha sido inserida
         console.log("não veio foto");
     }else{
-        imagem_produto = "imagens/"+ file.originalname;
+        imagem_produto = file.originalname;
+        let caminho_arquivo_origem = "public/imagens/produtos/"+req.body.nome_produto+"/"+file.originalname;
+        let caminho_arquivo_destino = "public/imagens/produtos/"+req.body.nome_produto+"/miniaturas/miniatura"+file.originalname;
+        miniaturizar_imagem(caminho_arquivo_origem, caminho_arquivo_destino, 200);
     }
     let produto_a_editar = req.body;
     produto_a_editar.imagem_produto = imagem_produto;
@@ -248,9 +279,6 @@ app.post("/venda", function(req, res){
         }
     });
 });
-
-
-
 
 app.listen("21080", function(){
     console.log("Queimando pneu na porta 21080");

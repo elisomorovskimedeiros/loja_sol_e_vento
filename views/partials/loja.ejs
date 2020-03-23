@@ -75,7 +75,7 @@
             <a href="#">
               <div class="id-produto" style="display: none"><%= produto.id_produto %></div>
               <div class="card h-100">
-                <img class="card-img-top foto-produto" src="<%= produto.imagem_produto %>" alt="">
+                <img class="card-img-top foto-produto" src="imagens/produtos/<%= produto.nome_produto %>/miniaturas/miniatura<%= produto.imagem_produto %>" alt="">
                 <div class="card-body">
                   <h4 class="card-title nome-produto"><%= produto.nome_produto %></h4>
                   <h5>R$<span class="preco-produto"><%= produto.preco_produto %></span></h5>

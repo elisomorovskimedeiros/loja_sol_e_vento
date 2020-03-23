@@ -10,9 +10,9 @@ $(document).ready(function(){
     
     //abre o modal de edição do produto
     $(".container-produto, .container-produto-editar").click(function(e){
-        
+        let foto_produto = $(e.currentTarget).find($(".foto-produto")).attr("src");
+        produto.foto_produto = foto_produto.slice(foto_produto.lastIndexOf("miniatura")+9, foto_produto.length);
         produto.nome_produto = $(e.currentTarget).find($(".nome-produto")).html();
-        produto.foto_produto = $(e.currentTarget).find($(".foto-produto")).attr("src");
         produto.codigo_produto = $(e.currentTarget).find($(".pn-produto")).html();
         produto.qtd_estoque = $(e.currentTarget).find($(".qtd-produto")).html();
         produto.preco_produto = $(e.currentTarget).find($(".preco-produto")).html();
@@ -20,7 +20,7 @@ $(document).ready(function(){
         produto.id_produto = $(e.currentTarget).find($(".id-produto")).html();
         if($(e.currentTarget).parent().attr("id") == "mostruario"){ //true caso seja aberto em detalhes de produto no mostruario
             $("#nome_produto_mostruario").html(produto.nome_produto);
-            $("#imagem_produto_mostruario").attr("src", produto.foto_produto);
+            $("#imagem_produto_mostruario").attr("src", "imagens/produtos/"+produto.nome_produto+"/"+produto.foto_produto);
             $("#pn_produto_mostruario").html(produto.codigo_produto);
             $("#preco_produto_mostruario").html(produto.preco_produto);
             $("#descricao_produto_mostruario").html(produto.descricao_produto);
