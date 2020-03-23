@@ -3,7 +3,6 @@ const     express = require("express");
        bodyParser = require("body-parser"),
    methodOverride = require("method-override"),
        nodemailer = require('nodemailer'),
-        Principal = require("./controller/principal"),
         Produto = require("./model/Produto"),
         multer  = require('multer'),//upload de arquivos
         Email = require("./model/Email");//envio de emails
@@ -26,7 +25,6 @@ var upload = multer({ storage: storage});//variável que manipula o post
 
 
 const app = express();
-const principal = new Principal();
 let produto = new Produto();
 let resposta = {};
 
