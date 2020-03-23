@@ -48,7 +48,7 @@ let transporter = nodemailer.createTransport({
 
 //rota principal
 app.get("/", function(req, res){
-    produto.select().then(function(resposta){
+    produto.select_produtos_disponiveis().then(function(resposta){
         if(!resposta.status){
             console.log(resposta.resultado);
         }else{
@@ -61,10 +61,11 @@ app.get("/", function(req, res){
 
 //rota da loja
 app.get("/index", function(req, res){
-    produto.select().then(function(resposta){
+    produto.select_produtos_disponiveis().then(function(resposta){
         if(!resposta.status){
             console.log(resposta.resultado);
         }else{
+            console.log(resposta.resultado);
             let produtos = resposta.resultado;
             res.render("index", {produtos});
         }

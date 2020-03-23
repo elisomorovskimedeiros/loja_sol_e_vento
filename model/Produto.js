@@ -36,36 +36,15 @@ class Produto{
                 });
             });
         }
-/*
-        this.query = async function(sql, variavel){
-            return await db.pool.getConnection(async function(err, con){
-                if (err){
-                    console.log("Deu error no pool.getConnection");
-                    console.log(err);
-                }else{
-                    return new Promise(function(resolve, reject){
-                        con.query(sql, variavel, function(err, resultado){
-                            if(err){
-                                if(err){
-                                    console.log("Deu error dentro da query");
-                                    console.log("error");                                    
-                                }else{
-                                    return resolve({status: false,
-                                        resultado: err});
-                                }                        
-                            }else{
-                                return resolve({status: true,
-                                        resultado: resultado});
-                            }
-                        });
-                    });
-                }                
-            });
-        };*/
     }
 
     select(){
         let sql = "SELECT * FROM produto;"
+        return this.query(sql);
+    }
+
+    select_produtos_disponiveis(){
+        let sql = "SELECT * FROM produto WHERE produto.qtd_produto > 0";
         return this.query(sql);
     }
 
