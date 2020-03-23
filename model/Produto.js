@@ -12,26 +12,56 @@ class Produto{
         this.qtd_produto = null;
         this.descricao_produto = null;
         this.query = async function(sql, variavel){
-            if(db.connection.state === 'disconected'){
-                db = new Db();
-            }
             return new Promise(function(resolve, reject){
-                db.connection.query(sql, variavel, function(err, resultado){
-                    if(err){
-                        if(err.errno == "ECONNRESET"){
-                            console.log("Precisou resetar a conexão!");
-                            db = new Db();
-                        }else{
-                            return resolve({status: false,
-                                resultado: err});
-                        }                        
+                return db.pool.getConnection(function(err, con){
+                    if (err){
+                        console.log("Deu error no pool.getConnection");
+                        console.log(err);
                     }else{
-                        return resolve({status: true,
-                                resultado: resultado});
+                        con.query(sql, variavel, function(err, resultado){
+                            if(err){
+                                if(err){
+                                    console.log("Deu error dentro da query");
+                                    console.log("error");                                    
+                                }else{
+                                    return resolve({status: false,
+                                        resultado: err});
+                                }                        
+                            }else{
+                                return resolve({status: true,
+                                        resultado: resultado});
+                            }
+                        });
                     }
                 });
             });
-        };
+        }
+/*
+        this.query = async function(sql, variavel){
+            return await db.pool.getConnection(async function(err, con){
+                if (err){
+                    console.log("Deu error no pool.getConnection");
+                    console.log(err);
+                }else{
+                    return new Promise(function(resolve, reject){
+                        con.query(sql, variavel, function(err, resultado){
+                            if(err){
+                                if(err){
+                                    console.log("Deu error dentro da query");
+                                    console.log("error");                                    
+                                }else{
+                                    return resolve({status: false,
+                                        resultado: err});
+                                }                        
+                            }else{
+                                return resolve({status: true,
+                                        resultado: resultado});
+                            }
+                        });
+                    });
+                }                
+            });
+        };*/
     }
 
     select(){
