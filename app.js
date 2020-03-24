@@ -35,7 +35,7 @@ function criar_diretorios_arquivos(dir){
     }
 }
 
-async function miniaturizar_imagem(caminho_arquivo_origem, caminho_arquivo_destino, height){
+async function redimensionar_imagem(caminho_arquivo_origem, caminho_arquivo_destino, height){
     //framework de redimensionamento de imagens
     Jimp.read(caminho_arquivo_origem)
         .then(lenna => {
@@ -144,7 +144,8 @@ app.post("/produtos", upload.single('imagem_produto'), function(req, res){
         imagem_produto = "imagens/"+ file.originalname;        
         let caminho_arquivo_origem = "public/imagens/produtos/"+req.body.nome_produto+"/"+file.originalname;
         let caminho_arquivo_destino = "public/imagens/produtos/"+req.body.nome_produto+"/miniaturas/miniatura"+file.originalname;
-        miniaturizar_imagem(caminho_arquivo_origem, caminho_arquivo_destino, 200);
+        redimensionar_imagem(caminho_arquivo_origem, caminho_arquivo_destino, 200);//miniatura usada para a lista geral
+        redimensionar_imagem(caminho_arquivo_origem, caminho_arquivo_origem, 400);//imagem usada para a tela de detalhes
     }
     produto.nome_produto = req.body.nome_produto;
     produto.pn_produto = req.body.pn_produto;
@@ -177,7 +178,8 @@ app.put("/produto/:id", upload.single('imagem_produto'), function(req, res){
         imagem_produto = file.originalname;
         let caminho_arquivo_origem = "public/imagens/produtos/"+req.body.nome_produto+"/"+file.originalname;
         let caminho_arquivo_destino = "public/imagens/produtos/"+req.body.nome_produto+"/miniaturas/miniatura"+file.originalname;
-        miniaturizar_imagem(caminho_arquivo_origem, caminho_arquivo_destino, 200);
+        redimensionar_imagem(caminho_arquivo_origem, caminho_arquivo_destino, 200);//miniatura usada para a lista geral
+        redimensionar_imagem(caminho_arquivo_origem, caminho_arquivo_origem, 400);//imagem usada para a tela de detalhes
     }
     let produto_a_editar = req.body;
     produto_a_editar.imagem_produto = imagem_produto;
