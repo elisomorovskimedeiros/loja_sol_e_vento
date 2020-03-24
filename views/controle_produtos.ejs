@@ -10,7 +10,7 @@
         <% produtos.forEach(function(produto, indice){ %>
             <div class="col-lg-4 container-produto-editar fake_de_link card card-body" data-toggle="modal" data-target="#janela_de_edicao_de_produto">
                     <div>
-                        <img class="foto-produto" src="<%= produto.imagem_produto%>" width="150px">
+                        <img class="foto-produto" src="imagens/produtos/<%= produto.nome_produto %>/miniaturas/miniatura<%= produto.imagem_produto %>" width="150px">
                     </div>
                     <div>
                         <h4 class="nome-produto"><%= produto.nome_produto %></h4>

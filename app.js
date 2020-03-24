@@ -5,8 +5,8 @@ const     express = require("express");
        nodemailer = require('nodemailer'),
           Produto = require("./model/Produto"),
           multer  = require('multer'),//upload de arquivos
-            Email = require("./model/Email");//envio de emails
-            sharp = require("sharp");//redimensionador de imagens
+            Email = require("./model/Email"),//envio de emails
+             Jimp = require('jimp'),//redimensionador de imagens
                fs = require("fs");
 
 
@@ -35,14 +35,16 @@ function criar_diretorios_arquivos(dir){
     }
 }
 
-function miniaturizar_imagem(caminho_arquivo_origem, caminho_arquivo_destino, height){
+async function miniaturizar_imagem(caminho_arquivo_origem, caminho_arquivo_destino, height){
     //framework de redimensionamento de imagens
-    sharp(caminho_arquivo_origem).resize({ 
-        height: height})
-        .toFile(caminho_arquivo_destino)
-        .catch(function(err){
-            console.log("Ocorreu erro na criação da miniatura da foto");
-            console.log(err);
+    Jimp.read(caminho_arquivo_origem)
+        .then(lenna => {
+            return lenna
+        .resize(Jimp.AUTO, height) // resize
+        .write(caminho_arquivo_destino); // save
+    })
+    .catch(err => {
+        console.error(err);
     });
 }
 
