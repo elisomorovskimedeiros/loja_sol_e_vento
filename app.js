@@ -7,11 +7,31 @@ const     express = require("express");
           multer  = require('multer'),//upload de arquivos
             Email = require("./model/Email"),//envio de emails
              Jimp = require('jimp'),//redimensionador de imagens
-               fs = require("fs");
+               fs = require("fs-extra");
 
+
+
+
+//fs-extra para manipular arquivos e diretórios
+function criar_diretorios_arquivos(dir){
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, 0744);
+    }
+    if (!fs.existsSync(dir+"/miniaturas")) {
+        fs.mkdirSync(dir+"/miniaturas", 0744);
+    }
+}
+
+function remover_arquivo(arquivo){
+    fs.remove(arquivo, (err) => {
+        if (err) {
+            console.error(err)
+            return 
+        }
+    });
+}
 
 //utilizado o midlleware Multer para captura do upload do arquivo contendo a foto dos produtos
-
 //configuração do multer
 //site que ajudou: https://code.tutsplus.com/tutorials/file-upload-with-multer-in-node--cms-32088
 var storage = multer.diskStorage({
@@ -26,14 +46,6 @@ var storage = multer.diskStorage({
     }    
 });
 
-function criar_diretorios_arquivos(dir){
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, 0744);
-    }
-    if (!fs.existsSync(dir+"/miniaturas")) {
-        fs.mkdirSync(dir+"/miniaturas", 0744);
-    }
-}
 
 async function redimensionar_imagem(caminho_arquivo_origem, caminho_arquivo_destino, height){
     //framework de redimensionamento de imagens
@@ -46,6 +58,7 @@ async function redimensionar_imagem(caminho_arquivo_origem, caminho_arquivo_dest
     .catch(err => {
         console.error(err);
     });
+
 }
 
 var upload = multer({ storage: storage});//variável que manipula o post
@@ -183,26 +196,53 @@ app.put("/produto/:id", upload.single('imagem_produto'), function(req, res){
     }
     let produto_a_editar = req.body;
     produto_a_editar.imagem_produto = imagem_produto;
-    
-    produto.update(produto_a_editar).then(function(resposta){
-        if(!resposta.status){
-            console.log(resposta);
-            res.send("Ocorreu um erro na edição do produto");
+    //puxar dados do produto para remover imagens antigas
+    produto.nome_e_imagens_produto(req.params.id).then(function(resposta){
+        if(resposta.status){
+            let produto_selecionado = resposta.resultado[0];
+            let imagem  = '', miniatura = '';
+            //testa para ver se vieram os dados da imagens no bd e se o arquivo não tem o mesmo nome do anterior
+            if(resposta.resultado[0].imagem_produto && resposta.resultado[0].imagem_produto != '' && imagem_produto != resposta.resultado[0].imagem_produto){
+                imagem = "public/imagens/produtos/"+produto_selecionado.nome_produto+"/"+produto_selecionado.imagem_produto;
+                miniatura = "public/imagens/produtos/"+produto_selecionado.nome_produto+"/miniaturas/miniatura"+produto_selecionado.imagem_produto;
+            }          
+            if(imagem && imagem != '') remover_arquivo(imagem);
+            if(miniatura != '') remover_arquivo(miniatura);
+            produto.update(produto_a_editar).then(function(resposta){
+                if(!resposta.status){
+                    console.log(resposta);
+                    res.send("Ocorreu um erro na edição do produto");
+                }else{
+                    res.send("Editado OK");
+                }
+            });            
         }else{
-            res.send("Editado OK");
+            console.log("Ocorreu erro no produto.nome_e_imagens_produto");
+            console.log(resposta);
         }
     });
+    
 });
 
 app.delete("/produto/:id", function(req, res){
-    produto.delete(req.params.id).then(function(resposta){
-        if(!resposta.status){
-            console.log(resposta);
-            res.send("Ocorreu um erro na exclusão do produto");
+    //puxar dados do produto para remover o diretório de imagens
+    produto.nome_e_imagens_produto(req.params.id).then(function(resposta){
+        if(resposta.status){
+            if(resposta.resultado[0].nome_produto && resposta.resultado[0].nome_produto != ''){
+                remover_arquivo("public/imagens/produtos/"+resposta.resultado[0].nome_produto);
+            }
+            produto.delete(req.params.id).then(function(resposta){
+                if(!resposta.status){
+                    console.log(resposta);
+                    res.send("Ocorreu um erro na exclusão do produto");
+                }else{
+                    res.send("excluído ok");
+                }
+            });
         }else{
-            res.send("excluído ok");
+            console.log(resposta);
         }
-    });
+    });    
 });
 
 app.get("/massoterapia", function(req, res){

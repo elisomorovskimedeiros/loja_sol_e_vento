@@ -17,16 +17,16 @@ class Produto{
                     if (err){
                         console.log("Deu error no pool.getConnection");
                         console.log(err);
+                        return reject({status: false,
+                            resultado: err});
                     }else{
                         con.query(sql, variavel, function(err, resultado){
+                            con.release();//usado para evitar o acúmulo de conexões abertas dentro do pool, substiutiu o con.ent()
                             if(err){
-                                if(err){
-                                    console.log("Deu error dentro da query");
-                                    console.log("error");                                    
-                                }else{
-                                    return resolve({status: false,
-                                        resultado: err});
-                                }                        
+                                console.log("Deu error dentro da query");
+                                console.log(err);
+                            return reject({status: false,
+                                resultado: err});
                             }else{
                                 return resolve({status: true,
                                         resultado: resultado});
@@ -82,6 +82,11 @@ class Produto{
 
     delete(id_produto){
         let sql = "DELETE FROM produto WHERE id_produto = ?"
+        return this.query(sql, id_produto);
+    }
+
+    nome_e_imagens_produto(id_produto){
+        let sql = "SELECT produto.nome_produto, imagem_produto FROM produto WHERE id_produto = ?";
         return this.query(sql, id_produto);
     }
 }

@@ -34,7 +34,7 @@ $(document).ready(function(){
             $("#descricao_produto_edicao").val(produto.descricao_produto);
             $("#qtd_produto_edicao").val(produto.qtd_estoque);
             $("#id_produto_edicao").val(produto.id_produto);
-            produto.url_action = "produto/"+id_produto+"?_method=PUT";
+            produto.url_action = "produto/"+produto.id_produto+"?_method=PUT";
             $("#form_editar_produto").attr("action", produto.url_action);
             $("#form_exclusao_produto").attr("action", "produto/"+produto.id_produto+"?_method=DELETE");
         }
