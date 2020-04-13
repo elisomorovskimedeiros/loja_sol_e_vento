@@ -250,12 +250,13 @@ function preencherConteudoCarrinho(){
   let numero_de_produtos = 0;
   $("#conteudo_carrinho").html("");
   produtos.forEach(function(produto_em_compra, indice){
+    let imagem_produto = caminho_imagens+removeAcento(produto_em_compra.nome_produto)+"/miniaturas/miniatura"+produto_em_compra.foto_produto;
     let div_criada = ($("#bloco_produto_carrinho").clone()
                                         .appendTo("#conteudo_carrinho"))
                                         .attr("id", indice)
                                         .removeClass("invisible")
                                         .removeClass("float")[0];
-    $($(div_criada).find(".imagem_produto_carrinho")[0]).attr("src", produto_em_compra.foto_produto);    
+    $($(div_criada).find(".imagem_produto_carrinho")[0]).attr("src", imagem_produto);    
     $($(div_criada).find(".nome_produto_carrinho")[0]).html(produto_em_compra.nome_produto);
     $($(div_criada).find(".preco_produto_carrinho")[0]).html(produto_em_compra.preco_produto);   
     $($(div_criada).find(".quantidade_produto_carrinho")[0]).val(produto_em_compra.quantidade_produto);
@@ -440,5 +441,17 @@ function teste_cidade(campo){
     };
   }
   inserir_feedback_no_campo(validacao);
+}
+
+//########################
+//função que remove acentos que possam existir nos nomes que serão dados aos arquivos ou diretórios
+function removeAcento(text){                                                         
+  text = text.replace(new RegExp('[ÁÀÂÃ]','gi'), 'a');
+  text = text.replace(new RegExp('[ÉÈÊ]','gi'), 'e');
+  text = text.replace(new RegExp('[ÍÌÎ]','gi'), 'i');
+  text = text.replace(new RegExp('[ÓÒÔÕ]','gi'), 'o');
+  text = text.replace(new RegExp('[ÚÙÛ]','gi'), 'u');
+  text = text.replace(new RegExp('[Ç]','gi'), 'c');
+  return text;                 
 }
 

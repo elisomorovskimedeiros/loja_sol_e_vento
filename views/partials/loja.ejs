@@ -67,7 +67,8 @@
 
         <div class="row container-loja" id="mostruario">
           <h5 align="justify" class="container">
-            Entrega dos produtos: Capão da Canoa: R$5,00<br>Xangri-lá: R$10,00<br>Para demais locais favor consultar.
+            Nesse período de quarentena do COVID-19 não estamos cobrando taxa de entrega para Capão da Canoa e para 
+            Xangri-lá estamos cobrando apenas R$5,00.
           </h5>
 
           <% produtos.forEach(function(produto){ %>
@@ -218,13 +219,14 @@
     </div>
     <div class="card card-body">
       <div class="form-row">
-        <div class="form-group col-sm-8" id="container_nome_cliente">
+        <div class="form-group col-sm-12" id="container_nome_cliente">
           <label class="form-control-label">
             Nome:
           </label>
           <input type="text" id="" class="form-control div_nome_cliente" onblur="teste_de_nome(this)">
           <div class="invalid-feedback"></div>
         </div>
+        <!--
         <div class="form-group col-sm-4" id="container_cpf_cliente">
           <label>
             CPF:
@@ -232,6 +234,7 @@
           <input type="text" id="" class="form-control div_cpf_cliente" required onblur="teste_cpf(this)">
           <div class="invalid-feedback"></div>
         </div>
+      -->
         <div class="form-group col-sm-4" id="container_telefone_cliente">
           <label>
             Telefone:

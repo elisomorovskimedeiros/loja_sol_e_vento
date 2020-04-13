@@ -197,14 +197,13 @@ $(document).ready(function(){
     //envio da compra para o servidor
     $("#btn_enviar_compra").click(function(){
         teste_de_nome($("#nome_cliente"));
-        teste_cpf($("#cpf_cliente"));
+        //teste_cpf($("#cpf_cliente"));
         teste_telefone($("#telefone_cliente"));
         teste_email($("#email_cliente"));
         teste_endereco($("#endereco_cliente"));
         teste_numero_casa($("#numero_casa_cliente"));
         teste_bairro($("#bairro_cliente"));
         teste_cidade($("#cidade_cliente"));
-        console.log($("#dados_cliente").find(".is-invalid"));
         if($("#dados_cliente").find(".is-invalid").length > 0){
             console.log("não deu");
         }else{
