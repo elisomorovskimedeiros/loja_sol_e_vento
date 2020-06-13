@@ -123,9 +123,7 @@ app.get("/contato", function(req, res){
     console.log(resposta);
     res.render("contato.ejs", {resposta});
 });
-app.get("/iluminacao", function(req, res){
-    res.render("iluminacao.ejs");
-});
+
 app.get("/solar", function(req, res){
     res.render("solar.ejs"); 
 });
