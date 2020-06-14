@@ -7,7 +7,7 @@ const     express = require("express");
           multer  = require('multer'),//upload de arquivos
             Email = require("./model/Email"),//envio de emails
              Jimp = require('jimp'),//redimensionador de imagens
-               fs = require("fs-extra");
+               //fs = require("fs-extra");
 
 
 
