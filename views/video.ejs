@@ -19,14 +19,87 @@
 </style>
 </head>
  
-<body>
+<body onclick='leitor.methods.iniciarLeitor()'>
 <div id="container">
 	<video autoplay="true" id="videoElement">
 	
     </video>
     <div id="msg"></div>
+
+    <div id="codigo"></div>
 </div>
+<script src="js/quagga.min.js"></script>
 <script>
+    var video = document.querySelector("#videoElement");
+    var stream;
+if (navigator.mediaDevices.getUserMedia) {
+  stream = navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function (stream) {
+        
+      video.srcObject = stream;
+      return stream;
+    })
+    .catch(function (err0r) {
+      console.log("Something went wrong!");
+    });
+}
+    let leitor = {
+  data: () => {
+    return {
+      code: '',
+      dialog: false,
+      cameraStatus: 0
+    }
+  },
+  methods: {
+    iniciarLeitor () {
+      this.cameraStatus = 1
+      Quagga.init({
+        inputStream: {
+          name: 'Live',
+          type: 'LiveStream',
+          // constraints: {
+          //   width: 300,
+          //   height: 300
+          // },
+         target: video
+        },
+        frequency: 10,
+        decoder: {
+          readers: [
+            'ean_reader'
+          ],
+          multiple: false
+        }
+        // numOfWorkers: navigator.hardwareConcurrency,
+        // locate: false
+      }, (err) => {
+        if (err) {
+          console.log(err)
+          document.getElementById("msg").innerHTML = err;
+          return
+        }
+        console.log('Initialization finished. Ready to start')
+        Quagga.start()
+        Quagga.onDetected(this.onDetected)
+      })
+    },
+    onDetected (data) {
+        document.getElementById("msg").innerHTML =  data.codeResult.code;
+      this.code = data.codeResult.code
+      document.getElementById("codigo").innerHTML = data.codeResult.code;
+      this.cameraStatus = 0
+      this.onStop()
+    },
+    onStop () {
+      Quagga.stop()
+      this.cameraStatus = 0
+    }
+  }
+}
+
+
+    /*
 var video = document.querySelector("#videoElement");
 if (navigator.mediaDevices.getUserMedia) {
   navigator.mediaDevices.getUserMedia({ video: true })
@@ -37,7 +110,7 @@ if (navigator.mediaDevices.getUserMedia) {
     .catch(function (err0r) {
       console.log("Something went wrong!");
     });
-}
+}*/
 </script>
 </body>
 </html>
