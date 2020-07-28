@@ -322,6 +322,10 @@ app.post("/venda", function(req, res){
     });
 });
 
+app.get("/video", function(req, res){
+    res.render("video.ejs");
+});
+
 app.listen("21080", function(){
     console.log("Queimando pneu na porta 21080");
 });
