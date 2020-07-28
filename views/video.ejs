@@ -31,16 +31,31 @@
 <script src="js/quagga.min.js"></script>
 <script>
     var video = document.querySelector("#videoElement");
-if (navigator.mediaDevices.getUserMedia) {
-navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function (stream) {
-        
-      video.srcObject = stream;
-    })
-    .catch(function (err0r) {
-      console.log("Something went wrong!");
-    });
-}
+    async function pegarCamera(){
+        if (navigator.mediaDevices.getUserMedia) {
+            return await navigator.mediaDevices.getUserMedia({video: { facingMode: { exact: "environment" } } },
+            function (stream) {
+                
+                video.srcObject = stream;
+                return video;
+                }, function (err0r) {
+            alert("Something went wrong!");
+            });
+
+/*
+            return await navigator.mediaDevices.getUserMedia({ video: {facingMode: { exact: "environment" }} })
+            .then(function (stream) {
+                
+            video.srcObject = stream;
+            return video;
+            })
+            .catch(function (err0r) {
+            alert("Something went wrong!");
+            });
+            */
+        }
+    }
+
     let leitor = {
   data: () => {
     return {
@@ -50,7 +65,7 @@ navigator.mediaDevices.getUserMedia({ video: true })
     }
   },
   methods: {
-    iniciarLeitor () {
+    async iniciarLeitor () {
       this.cameraStatus = 1
       Quagga.init({
         inputStream: {
@@ -60,7 +75,7 @@ navigator.mediaDevices.getUserMedia({ video: true })
           //   width: 300,
           //   height: 300
           // },
-         target: video
+         target: await pegarCamera()
         },
         frequency: 10,
         decoder: {
