@@ -19,7 +19,7 @@
 </style>
 </head>
  
-<body onclick='leitor.methods.iniciarLeitor()'>
+<body>
 <div id="container">
 	<video autoplay="true" id="videoElement">
 	
@@ -31,13 +31,11 @@
 <script src="js/quagga.min.js"></script>
 <script>
     var video = document.querySelector("#videoElement");
-    var stream;
 if (navigator.mediaDevices.getUserMedia) {
-  stream = navigator.mediaDevices.getUserMedia({ video: true })
+navigator.mediaDevices.getUserMedia({ video: true })
     .then(function (stream) {
         
       video.srcObject = stream;
-      return stream;
     })
     .catch(function (err0r) {
       console.log("Something went wrong!");
@@ -84,9 +82,9 @@ if (navigator.mediaDevices.getUserMedia) {
         Quagga.onDetected(this.onDetected)
       })
     },
-    onDetected (data) {
-        document.getElementById("msg").innerHTML =  data.codeResult.code;
+    onDetected (data) {      
       this.code = data.codeResult.code
+      console.log(data.codeResult.code);
       document.getElementById("codigo").innerHTML = data.codeResult.code;
       this.cameraStatus = 0
       this.onStop()
@@ -97,6 +95,7 @@ if (navigator.mediaDevices.getUserMedia) {
     }
   }
 }
+leitor.methods.iniciarLeitor();
 
 
     /*
