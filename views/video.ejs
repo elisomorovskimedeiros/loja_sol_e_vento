@@ -1,62 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Display Webcam Stream</title>
- 
-<style>
-#container {
-	margin: 0px auto;
-	width: 500px;
-	height: 375px;
-	border: 10px #333 solid;
-}
-#videoElement {
-	width: 500px;
-	height: 375px;
-	background-color: #666;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
- 
+
 <body>
-<div id="container">
-	<video autoplay="true" id="videoElement">
-	
-    </video>
-    <div id="msg"></div>
-
-    <div id="codigo"></div>
-</div>
-<script src="js/quagga.min.js"></script>
-<script>
-    var video = document.querySelector("#videoElement");
-    async function pegarCamera(){
-        if (navigator.mediaDevices.getUserMedia) {
-            return await navigator.mediaDevices.getUserMedia({video: { facingMode: { exact: "environment" } } },
-            function (stream) {
-                
-                video.srcObject = stream;
-                return video;
-                }, function (err0r) {
-            alert("Something went wrong!");
-            });
-
-/*
-            return await navigator.mediaDevices.getUserMedia({ video: {facingMode: { exact: "environment" }} })
-            .then(function (stream) {
-                
-            video.srcObject = stream;
-            return video;
-            })
-            .catch(function (err0r) {
-            alert("Something went wrong!");
-            });
-            */
-        }
-    }
-
-    let leitor = {
+    <div class="row items-center" style="height: 100vh">
+        <div class="col text-center q-pa-sm ">
+            <q-btn color="primary" icon="camera_alt" label="Ler Código de Barras"
+            class="full-width" size="lg" onclick="leitor.methods.iniciarLeitor()"
+            v-show="cameraStatus === 0"/>
+            <div class="text-h6" v-if="code">Codigo:<span id="msg"> {{ code }}</span></div>
+            <div id="scan" v-show="cameraStatus === 1"></div>
+            <q-page-sticky position="bottom-right" :offset="[18, 18]">
+            <q-btn  icon="cancel" color="negative" label="Fechar" v-show="cameraStatus === 1"
+            @click="onStop" />
+            </q-page-sticky>
+        </div>
+    </div>
+</body>
+    <script src="js/quagga.min.js">     
+    </script>
+    <script>
+let leitor = {
   data: () => {
     return {
       code: '',
@@ -65,17 +34,16 @@
     }
   },
   methods: {
-    async iniciarLeitor () {
+    iniciarLeitor () {
       this.cameraStatus = 1
       Quagga.init({
         inputStream: {
           name: 'Live',
           type: 'LiveStream',
-          // constraints: {
-          //   width: 300,
-          //   height: 300
-          // },
-         target: await pegarCamera()
+          constraints: {
+            facingMode: "enviroment"  
+          },
+          target: document.querySelector('#scan')
         },
         frequency: 10,
         decoder: {
@@ -97,10 +65,9 @@
         Quagga.onDetected(this.onDetected)
       })
     },
-    onDetected (data) {      
+    onDetected (data) {
+        document.getElementById("msg").innerHTML =  data.codeResult.code;
       this.code = data.codeResult.code
-      console.log(data.codeResult.code);
-      document.getElementById("codigo").innerHTML = data.codeResult.code;
       this.cameraStatus = 0
       this.onStop()
     },
@@ -110,21 +77,18 @@
     }
   }
 }
-leitor.methods.iniciarLeitor();
+
+    </script>
 
 
-    /*
-var video = document.querySelector("#videoElement");
-if (navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function (stream) {
-        
-      video.srcObject = stream;
-    })
-    .catch(function (err0r) {
-      console.log("Something went wrong!");
-    });
-}*/
-</script>
-</body>
+
+    <style>
+        video {
+            width: 100%;
+            height: auto;
+        }
+        canvas {
+            display: none;
+        }
+    </style>
 </html>
