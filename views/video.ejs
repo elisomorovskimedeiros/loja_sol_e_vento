@@ -25,6 +25,27 @@
     <script src="js/quagga.min.js">     
     </script>
     <script>
+
+var backCamID = null;
+var last_camera = null;
+navigator.mediaDevices.enumerateDevices()
+.then(function(devices) {
+  devices.forEach(function(device) {  
+    if( device.kind == "videoinput" && device.label.match(/back/) !== null ){
+      backCamID = device.deviceId;
+    }
+    if( device.kind === "videoinput"){
+      last_camera = device.deviceId;
+    } 
+  });
+  if( backCamID === null){
+    backCamID = last_camera;
+  }
+}).catch(function(err) {
+  console.log("ocorreu erro na descoberta da camera");
+  console.log(err);
+});
+
 let leitor = {
   data: () => {
     return {
@@ -41,7 +62,7 @@ let leitor = {
           name: 'Live',
           type: 'LiveStream',
           constraints: {
-            facingMode: "enviroment"  
+            deviceId: backCamID  
           },
           target: document.querySelector('#scan')
         },
