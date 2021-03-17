@@ -11,7 +11,7 @@ const     express = require("express");
 
 
 
-
+/*
 //fs-extra para manipular arquivos e diretórios
 function criar_diretorios_arquivos(dir){
     if (!fs.existsSync(dir)) {
@@ -64,17 +64,29 @@ async function redimensionar_imagem(caminho_arquivo_origem, caminho_arquivo_dest
 var upload = multer({ storage: storage});//variável que manipula o post
 
 
-const app = express();
+
 let produto = new Produto();
 let resposta = {};
 
-app.set("view engine", "ejs");
+*/
+const app = express();
+
+
+//app.set("view engine", "ejs");
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(methodOverride("_method"));
 app.use(express.static("public"));
 
+
+//rota principal
+app.get("/", function(req, res){
+    res.sendFile('index.html');    
+});
+
+/*
 //Serviço de envio de email
 
 //sentando conta para envio dos emails
@@ -326,6 +338,8 @@ app.get("/video", function(req, res){
     res.render("video.ejs");
 });
 
+
+*/
 app.listen("21080", function(){
     console.log("Queimando pneu na porta 21080");
 });
