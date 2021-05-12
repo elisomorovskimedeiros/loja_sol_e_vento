@@ -24,7 +24,7 @@
     "fs": "0.0.1-security",
     "method-override": "^3.0.0",
     "mongoose": "^5.4.20",
-    "nodemailer": "^5.1.1",
+    "nodemailer": "^6.4.16",
     "suspend": "^0.7.0"
   }
 }
